@@ -2,6 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
+const authRoutes = require('./routes/auth');
+const jobRoutes = require('./routes/job')
+
 dotenv.config();
 const app = express();
 
@@ -20,6 +23,10 @@ app.get("/health", (req, res) => {
     status: "active",
   });
 });
+
+//register routes
+app.use('/auth', authRoutes);
+// app.use('/api/job', jobRoutes);
 
 app.listen(process.env.PORT, () => {
   mongoose

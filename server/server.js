@@ -26,7 +26,7 @@ app.get("/health", (req, res) => {
 
 //register routes
 app.use('/auth', authRoutes);
-// app.use('/api/job', jobRoutes);
+app.use('/job', jobRoutes);
 
 app.listen(process.env.PORT, () => {
   mongoose

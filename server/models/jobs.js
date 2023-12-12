@@ -45,7 +45,7 @@ const jobPostSchema = new mongoose.Schema({
   },
   information: {
     type: String,
-    required: ture,
+    required: true,
   },
 });
 

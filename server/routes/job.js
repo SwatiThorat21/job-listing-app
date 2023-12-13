@@ -3,7 +3,7 @@ const router = express.Router();
 const JobPost = require("../models/jobs");
 const isLoggedIn = require("../middlewares/isLoggedIn");
 
-router.post("/create-job", isLoggedIn, async (req, res) => {
+router.post("/job-post", isLoggedIn, async (req, res) => {
   try {
     const {
       companyName,
@@ -42,14 +42,15 @@ router.post("/create-job", isLoggedIn, async (req, res) => {
       message: "You have sucessfully created Job!",
     });
   } catch (error) {
+    console.log(error)
     res.status(500).json({
       status: "FAILED",
-      message: "Failed to create Job",
+      message: error.message,
     });
   }
 });
 
-router.patch("/:id", async (req, res) => {
+router.patch("/job-post/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const {

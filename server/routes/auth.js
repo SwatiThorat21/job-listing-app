@@ -40,6 +40,8 @@ router.post("/register", async (req, res) => {
     res.json({
       status: "SUCCESS",
       message: "You have registered in sucessfully !!",
+      user: email,
+      recruiterName: name,
     });
   } catch (error) {
     errorHandler(res, error);
@@ -56,6 +58,7 @@ router.post("/login", async (req, res) => {
     }
 
     const user = await User.findOne({ email });
+    console.log(user)
     if (!user) {
       return res.status(401).json({
         error: "Invalid email or password",
@@ -72,6 +75,8 @@ router.post("/login", async (req, res) => {
           status: "SUCCESS",
           message: "You've logged in sucessfully !!",
           jwToken,
+          recruiterName: user.name,
+          user: email,
         });
       } else {
         res.json({
@@ -86,7 +91,7 @@ router.post("/login", async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
     errorHandler(res, error);
   }
 });

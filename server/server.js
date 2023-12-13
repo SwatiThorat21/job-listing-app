@@ -2,8 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
-const authRoutes = require('./routes/auth');
-const jobRoutes = require('./routes/job')
+const authRoutes = require("./routes/auth");
+const jobRoutes = require("./routes/job");
 
 dotenv.config();
 const app = express();
@@ -11,10 +11,13 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// mongoose.connect(process.env.MONGODB_URL, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// })
+const databaseName = "jobportal";
+
+mongoose.connect(process.env.MONGODB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  dbName: databaseName,
+});
 
 app.get("/health", (req, res) => {
   res.status(200).json({
@@ -25,8 +28,8 @@ app.get("/health", (req, res) => {
 });
 
 //register routes
-app.use('/auth', authRoutes);
-app.use('/job', jobRoutes);
+app.use("/auth", authRoutes);
+app.use("/job", jobRoutes);
 
 app.listen(process.env.PORT, () => {
   mongoose

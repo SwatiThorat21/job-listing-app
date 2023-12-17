@@ -93,7 +93,6 @@ router.patch("/job-post/:id", async (req, res) => {
 
 router.get("/job-post", async (req, res) => {
   const { jobPosition, skills } = req.query;
-  console.log(req.params);
   try {
     let query = {};
     if (jobPosition) {
@@ -124,12 +123,7 @@ router.get("/job-post/:id", async (req, res) => {
         message: "Job not found",
       });
     }
-
-    res.json({
-      status: "SUCCESS",
-      message: "Job details retrieved successfully",
-      data: job,
-    });
+    res.json({ job });
   } catch (error) {
     res.status(500).json({
       status: "FAILED",

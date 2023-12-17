@@ -21,7 +21,7 @@ router.post("/job-post", isLoggedIn, async (req, res) => {
 
     let skillsArray = skills;
     if (typeof skills === "string") {
-      skillsArray.split(",").map((skill) => skill.trim());
+      skillsArray = skills.split(",").map((skill) => skill.trim());
     }
 
     await JobPost.create({
@@ -42,7 +42,6 @@ router.post("/job-post", isLoggedIn, async (req, res) => {
       message: "You have sucessfully created Job!",
     });
   } catch (error) {
-    console.log(error)
     res.status(500).json({
       status: "FAILED",
       message: error.message,
@@ -88,6 +87,53 @@ router.patch("/job-post/:id", async (req, res) => {
     res.json({
       status: "FAILED",
       message: "Something went wrong",
+    });
+  }
+});
+
+router.get("/job-post", async (req, res) => {
+  const { jobPosition, skills } = req.query;
+  console.log(req.params);
+  try {
+    let query = {};
+    if (jobPosition) {
+      query.jobPosition = jobPosition;
+    }
+    if (skills) {
+      query.skills = { $in: skills.split("&") };
+    }
+    const jobs = await JobPost.find(query).sort({ createdAt: -1 });
+    res.json({ jobs });
+  } catch (error) {
+    res.json({
+      status: "FAILED",
+      message: error.message,
+    });
+  }
+});
+
+router.get("/job-post/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const job = await JobPost.findById(id);
+    console.log(job);
+
+    if (!job) {
+      return res.status(404).json({
+        status: "FAILED",
+        message: "Job not found",
+      });
+    }
+
+    res.json({
+      status: "SUCCESS",
+      message: "Job details retrieved successfully",
+      data: job,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "FAILED",
+      message: error.message,
     });
   }
 });

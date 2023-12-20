@@ -1,14 +1,14 @@
-.login_container {
+.registerPage_container {
   display: flex;
   justify-content: space-between;
   overflow: hidden;
 }
-.login_form_container {
+.register_form_container {
   width: 50%;
   padding: 0 4rem;
   height: 100vh;
 }
-.login_form_container h2 {
+.register_form_container h2 {
   font-size: 40px;
   margin: 0;
   margin-top: 5rem;
@@ -23,14 +23,14 @@
   display: flex;
   flex-direction: column;
 }
-.login_input {
+.input {
   border: 2px solid #c2c2c2;
   outline: none;
   padding: 0.7rem 1.2rem;
   margin-bottom: 0.6rem;
   border-radius: 5px;
 }
-.login_btn {
+.register_btn {
   background-color: #ed5353;
   padding: 0.7rem 4rem;
   outline: none;
@@ -69,4 +69,13 @@
 .loginPage_bg {
   width: 620px;
   height: 100%;
+}
+.conditions_check {
+  font-size: 14px;
+  color: #525252;
+}
+.conditions_check_wrapper{
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }

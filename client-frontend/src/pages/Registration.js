@@ -30,7 +30,7 @@ export default function Registration() {
           <button className="register_btn">Create Account</button>
           <p className="signup_link_para">
             Already have an account?
-            <span className="signup_link" onClick={() => navigate("/")}>
+            <span className="signup_link" onClick={() => navigate("/login")}>
               Sign In
             </span>
           </p>

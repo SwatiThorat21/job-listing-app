@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import "./register.css";
+import "./registerPage.css";
 import login_bgImg from "../images/login_bg_img.png";
 
 export default function Registration() {

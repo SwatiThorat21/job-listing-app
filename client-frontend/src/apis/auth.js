@@ -12,7 +12,7 @@ export function login(email, password) {
     const response = axios
       .post(reqUrl, reqPayload)
       .then((response) =>
-        localStorage.setItem("jwToken", response.data.jwToken)
+        localStorage.setItem("token", response.data.jwToken)
       )
       .catch((error) => console.log(error));
 

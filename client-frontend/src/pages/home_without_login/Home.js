@@ -1,42 +1,17 @@
+import "./home.css";
+import Navbar from "../../components/Navbar/Navbar";
 import logo from "../../images/company_logo.png";
 import peopleIcon from "../../images/people_logo.png";
 import rupeeIcon from "../../images/rupee_logo.png";
 import flag from "../../images/country_flag.png";
-import leftRectangle from "../../images/home_left_rectangle.png";
-import rightRectangle from "../../images/home_right_rectangle.png";
-import topRectangle from "../../images/home_top_rectangle.png";
 import searchbar from "../../images/search.png";
 import closeIcon from "../../images/close_icon.png";
-import { useNavigate } from "react-router-dom";
-import "./home.css";
 
 export default function Home() {
-  const navigate = useNavigate();
   return (
     <>
       <div className="home_container">
-        <div className="navbar">
-          <h3>Jobfinder</h3>
-          <div className="login_btns_wrapper">
-            <button className="loginBtn" onClick={()=>navigate('/login')}>Login</button>
-            <button className="registerBtn" onClick={()=>navigate('/register')}>Register</button>
-          </div>
-          <img
-            src={leftRectangle}
-            alt="leftRectangle"
-            className="leftRectangle"
-          ></img>
-          <img
-            src={rightRectangle}
-            alt="rightRectangle"
-            className="rightRectangle"
-          ></img>
-          <img
-            src={topRectangle}
-            alt="topRectangle"
-            className="topRectangle"
-          ></img>
-        </div>
+        <Navbar />
         <div className="mainPage_container">
           <div className="search_container">
             <div className="input_container">

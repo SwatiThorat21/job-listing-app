@@ -1,14 +1,9 @@
-.registerPage_container {
-  display: flex;
-  justify-content: space-between;
-  overflow: hidden;
-}
-.register_form_container {
+.login_form_container {
   width: 50%;
-  padding: 0 6rem;
+  padding: 0 8rem;
   height: 100vh;
 }
-.register_form_container h2 {
+.login_form_container h2 {
   font-size: 40px;
   margin: 0;
   margin-top: 5rem;
@@ -24,19 +19,19 @@
   display: flex;
   flex-direction: column;
 }
-.input {
+.login_input {
   border: 2px solid #c2c2c2;
   outline: none;
   padding: 0.7rem 1.2rem;
   margin-bottom: 0.6rem;
   border-radius: 5px;
 }
-input::placeholder{
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    color: #525252;
+input::placeholder {
+  font-family: "DM Sans", sans-serif;
+  font-size: 15px;
+  color: #525252;
 }
-.register_btn {
+.login_btn {
   background-color: #ed5353;
   padding: 0.7rem 4rem;
   outline: none;
@@ -46,6 +41,7 @@ input::placeholder{
   border-radius: 5px;
   font-weight: 600;
   margin-top: 1.2rem;
+  cursor: pointer;
 }
 .signup_link_para {
   color: #525252;
@@ -56,32 +52,4 @@ input::placeholder{
   margin-left: 5px;
   border-bottom: 1px solid #000000;
   cursor: pointer;
-}
-.login_bg_img_container {
-  position: relative;
-  text-align: center;
-  width: 620px;
-  height: 100vh;
-}
-.tagline {
-  position: absolute;
-  top: 1rem;
-  color: #ffffff;
-  font-size: 38px;
-  letter-spacing: 2px;
-  font-weight: 500;
-  width: 100%;
-}
-.loginPage_bg {
-  width: 620px;
-  height: 100%;
-}
-.conditions_check {
-  font-size: 14px;
-  color: #525252;
-}
-.conditions_check_wrapper {
-  display: flex;
-  align-items: center;
-  gap: 5px;
 }

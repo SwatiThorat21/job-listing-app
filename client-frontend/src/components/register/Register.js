@@ -1,36 +1,33 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./registerPage.css";
-import login_bgImg from "../images/login_bg_img.png";
-import { register } from "../apis/auth";
+import "./register.css";
+import { register } from "../../apis/auth";
 
-export default function Registration() {
-  const navigate = useNavigate();
-  const [registerData, setRegisterData] = useState({
-    name: "",
-    email: "",
-    mobile: "",
-    password: "",
-  });
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setRegisterData((prevData) => {
-      return {
-        ...prevData,
-        [name]: value,
-      };
+export default function Register(){
+    const navigate = useNavigate();
+    const [registerData, setRegisterData] = useState({
+      name: "",
+      email: "",
+      mobile: "",
+      password: "",
     });
-  }
-  function addRegisterUser(name, email, mobile, password) {
-    register(name, email, mobile, password);
-    navigate("/");
-  }
-
-  return (
-    <>
-      <div className="registerPage_container">
-        <div className="register_form_container">
+  
+    function handleChange(e) {
+      const { name, value } = e.target;
+      setRegisterData((prevData) => {
+        return {
+          ...prevData,
+          [name]: value,
+        };
+      });
+    }
+    function addRegisterUser(name, email, mobile, password) {
+      register(name, email, mobile, password);
+      navigate("/");
+    }
+    return(
+        <>
+         <div className="register_form_container">
           <h2>Create an account</h2>
           <p className="login_heading">Your personal job finder is here</p>
           <div className="input_wrapper">
@@ -93,15 +90,6 @@ export default function Registration() {
             </span>
           </p>
         </div>
-        <div className="login_bg_img_container">
-          <h2 className="tagline">Your Personal Job Finder</h2>
-          <img
-            src={login_bgImg}
-            alt="login_bgImg"
-            className="loginPage_bg"
-          ></img>
-        </div>
-      </div>
-    </>
-  );
+        </>
+    )
 }

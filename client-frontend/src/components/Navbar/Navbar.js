@@ -19,13 +19,21 @@ export default function Navbar() {
     }
   }, []);
 
+  function isLogOut() {
+    setIsLoggedIn(false);
+    navigate("/login");
+    localStorage.removeItem("token");
+  }
+
   return (
     <>
       {isLoggedIn ? (
         <div className="navbar">
           <h3>Jobfinder</h3>
           <div className="login_btns_wrapper">
-            <p className="logout_option">Logout</p>
+            <p className="logout_option" onClick={() => isLogOut()}>
+              Logout
+            </p>
             <p className="recruiter_name">Hello! Recruiter</p>
             <img src={recruiter_logo} alt="recruiter_logo"></img>
           </div>

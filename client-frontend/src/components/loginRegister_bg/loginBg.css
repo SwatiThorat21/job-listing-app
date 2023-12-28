@@ -1,0 +1,21 @@
+
+.login_bg_img_container {
+    position: relative;
+    text-align: center;
+    width: 550px;
+    height: 101vh;
+  }
+  .tagline {
+    position: absolute;
+    top: 1rem;
+    color: #ffffff;
+    font-size: 38px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    width: 100%;
+  }
+  .loginPage_bg {
+    width: 620px;
+    height: 101vh;
+  }
+  

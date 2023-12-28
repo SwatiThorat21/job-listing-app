@@ -9,14 +9,14 @@ export function login(email, password) {
       email: email,
       password: password,
     };
-    const response = axios
+ axios
       .post(reqUrl, reqPayload)
-      .then((response) =>
-        localStorage.setItem("token", response.data.jwToken)
-      )
+      .then((response) => {
+        localStorage.setItem("token", response.data.jwToken);
+        return response.data;
+      })
       .catch((error) => console.log(error));
-
-    return response;
+  
   } catch (error) {
     console.log(error.message);
   }

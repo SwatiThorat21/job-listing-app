@@ -1,10 +1,12 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Registration from "./pages/RegistrationPage.js";
-import Login from "./pages/LoginPage.js";
-import Home from "./pages/home_without_login/Home.js";
+import Registration from "./pages/registerPage/RegistrationPage.js";
+import Login from "./pages/login_page/LoginPage.js";
+import Home from "./pages/home_page/Home.js";
+
 
 function App() {
+
   return (
     <>
       <Router>

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./loginForm.css";
 import { login } from "../../apis/auth";
 
-export default function LoginForm() {
+export default function LoginForm({ setUserData }) {
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
     email: "",
@@ -20,8 +20,14 @@ export default function LoginForm() {
     });
   }
   function addLoginUser(email, password) {
-    login(email, password);
-    navigate("/");
+    login(email, password)
+      .then((data) => {
+        setUserData(data);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   }
 
   return (

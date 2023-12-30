@@ -9,16 +9,16 @@ export function login(email, password) {
       email: email,
       password: password,
     };
- axios
+    return axios
       .post(reqUrl, reqPayload)
       .then((response) => {
         localStorage.setItem("token", response.data.jwToken);
         return response.data;
       })
       .catch((error) => console.log(error));
-  
   } catch (error) {
     console.log(error.message);
+    throw error;
   }
 }
 

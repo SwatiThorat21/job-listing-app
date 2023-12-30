@@ -6,9 +6,10 @@ import topRectangle from "../../images/home_top_rectangle.png";
 import recruiter_logo from "../../images/recruiter_logo.png";
 import "./navbar.css";
 
-export default function Navbar() {
+export default function Navbar({ userData }) {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  console.log(userData)
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -34,7 +35,7 @@ export default function Navbar() {
             <p className="logout_option" onClick={() => isLogOut()}>
               Logout
             </p>
-            <p className="recruiter_name">Hello! Recruiter</p>
+            <p className="recruiter_name">Hello!, {userData.recruiterName}</p>
             <img src={recruiter_logo} alt="recruiter_logo"></img>
           </div>
           <img

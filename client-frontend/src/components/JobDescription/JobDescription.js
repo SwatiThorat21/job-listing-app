@@ -1,50 +1,51 @@
 import google from "../../images/Google.png";
 import stipend from "../../images/money-fill.png";
 import calender from "../../images/calender.png";
+import styles from "./JobDescription.module.css"
 
 export default function JobDescription() {
   return (
     <>
-      <div className="jd_containder">
-        <div className="jd_heading">
+      <div className={styles.jd_containder}>
+        <div className={styles.jd_heading}>
           <p>
             WordPress Development work from home job/internship at Adyaka
             Infosec Private Limited
           </p>
         </div>
-        <div className="job_details">
-          <div className="top_details">
+        <div className={styles.job_details}>
+          <div className={styles.top_details}>
             <p>1w ago</p>
             <p>.</p>
             <p>Full time</p>
-            <img src={google} alt="google"></img>
+            <img src={google} alt={styles.google}></img>
             <p>Google</p>
           </div>
-          <div className="job_title_container">
-            <div className="title_wrapper">
-              <div className="job_title">WordPress Development</div>
+          <div className={styles.job_title_container}>
+            <div className={styles.title_wrapper}>
+              <div className={styles.job_title}>WordPress Development</div>
               <p>Banglore</p>
             </div>
-            <button className="edit_btn">Edit job</button>
+            <button className={styles.edit_btn}>Edit job</button>
           </div>
-          <div className="stipend_duration_wrapper">
+          <div className={styles.stipend_duration_wrapper}>
             <div>
-              <div className="flex_details">
+              <div className={styles.flex_details}>
                 <img src={stipend} alt="stipend"></img>
                 <p>Stipend</p>
               </div>
               <p>Rs 25000/month</p>
             </div>
             <div>
-              <div className="flex_details">
+              <div className={styles.flex_details}>
                 <img src={calender} alt="stipend"></img>
                 <p>Durtion</p>
               </div>
               <p>6 Months</p>
             </div>
           </div>
-          <div className="description_wrapper">
-            <div className="about_company">
+          <div className={styles.description_wrapper}>
+            <div className={styles.about_company}>
               <h2>About company</h2>
               <p>
                 We provide technology-based services to help businesses and
@@ -56,7 +57,7 @@ export default function JobDescription() {
                 overall efficiency.
               </p>
             </div>
-            <div className="about_job">
+            <div className={styles.about_job}>
               <h2>About the job/internship</h2>
               <p>
                 We are looking for a responsible PHP/WordPress/Laravel/Shopify
@@ -78,12 +79,12 @@ export default function JobDescription() {
                 mobile-friendly website
               </p>
             </div>
-            <div className="skilld_required_wrapper">
-              <div className="skill">CSS</div>
-              <div className="skill">HTML</div>
-              <div className="skill">WordPress</div>
+            <div className={styles.skilld_required_wrapper}>
+              <div className={styles.skill}>CSS</div>
+              <div className={styles.skill}>HTML</div>
+              <div className={styles.skill}>WordPress</div>
             </div>
-            <div className="additional_info">
+            <div className={styles.additional_info}>
               <h2>Additional Information</h2>
               <p>
                 Stipend structure: This is a performance-based internship. In

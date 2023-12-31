@@ -2,17 +2,18 @@ import axios from "axios";
 
 const backendBaseUrl = process.env.REACT_APP_BACKEND_URL;
 
-export function login(email, password) {
+export async function login(email, password) {
   try {
     const reqUrl = `${backendBaseUrl}/auth/login`;
     const reqPayload = {
       email: email,
       password: password,
     };
-    return axios
+    return await axios
       .post(reqUrl, reqPayload)
       .then((response) => {
         localStorage.setItem("token", response.data.jwToken);
+        localStorage.setItem("userData", JSON.stringify(response.data));
         return response.data;
       })
       .catch((error) => console.log(error));

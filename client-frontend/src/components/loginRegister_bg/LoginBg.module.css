@@ -3,7 +3,7 @@
     position: relative;
     text-align: center;
     width: 550px;
-    height: 101vh;
+    height: 99vh;
   }
   .tagline {
     position: absolute;
@@ -15,7 +15,7 @@
     width: 100%;
   }
   .loginPage_bg {
-    width: 620px;
-    height: 101vh;
+    width: 550px;
+    height: 99vh;
   }
   

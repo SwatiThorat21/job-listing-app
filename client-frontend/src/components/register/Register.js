@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./register.css";
+import styles from "./Register.module.css";
 import { register } from "../../apis/auth";
 
 export default function Register(){
@@ -27,14 +27,14 @@ export default function Register(){
     }
     return(
         <>
-         <div className="register_form_container">
+         <div className={styles.register_form_container}>
           <h2>Create an account</h2>
-          <p className="login_heading">Your personal job finder is here</p>
-          <div className="input_wrapper">
+          <p className={styles.login_heading}>Your personal job finder is here</p>
+          <div className={styles.input_wrapper}>
             <input
               type="text"
               placeholder="Name"
-              className="input"
+              className={styles.input}
               name="name"
               onChange={handleChange}
               value={registerData.name}
@@ -42,7 +42,7 @@ export default function Register(){
             <input
               type="email"
               placeholder="Email"
-              className="input"
+              className={styles.input}
               name="email"
               onChange={handleChange}
               value={registerData.email}
@@ -50,7 +50,7 @@ export default function Register(){
             <input
               type="text"
               placeholder="Mobile"
-              className="input"
+              className={styles.input}
               name="mobile"
               onChange={handleChange}
               value={registerData.mobile}
@@ -58,20 +58,20 @@ export default function Register(){
             <input
               type="password"
               placeholder="Password"
-              className="input"
+              className={styles.input}
               name="password"
               onChange={handleChange}
               value={registerData.password}
             ></input>
-            <div className="conditions_check_wrapper">
+            <div className={styles.conditions_check_wrapper}>
               <input type="checkbox"></input>
-              <label className="conditions_check">
+              <label className={styles.conditions_check}>
                 By creating an account, I agree to our terms of use and privacy
               </label>
             </div>
           </div>
           <button
-            className="register_btn"
+            className={styles.register_btn}
             onClick={() =>
               addRegisterUser(
                 registerData.name,
@@ -83,9 +83,9 @@ export default function Register(){
           >
             Create Account
           </button>
-          <p className="signup_link_para">
+          <p className={styles.signup_link_para}>
             Already have an account?
-            <span className="signup_link" onClick={() => navigate("/login")}>
+            <span className={styles.signup_link} onClick={() => navigate("/login")}>
               Sign In
             </span>
           </p>

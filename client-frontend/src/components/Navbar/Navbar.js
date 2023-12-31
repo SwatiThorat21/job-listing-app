@@ -1,68 +1,57 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import leftRectangle from "../../images/home_left_rectangle.png";
 import rightRectangle from "../../images/home_right_rectangle.png";
 import topRectangle from "../../images/home_top_rectangle.png";
 import recruiter_logo from "../../images/recruiter_logo.png";
-import "./navbar.css";
+import styles from "./Navbar.module.css";
 
-export default function Navbar({ userData }) {
+export default function Navbar({ userData, isLoggedIn, setIsLoggedIn }) {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  console.log(userData)
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      setIsLoggedIn(false);
-    } else {
-      setIsLoggedIn(true);
-    }
-  }, []);
 
   function isLogOut() {
     setIsLoggedIn(false);
     navigate("/login");
     localStorage.removeItem("token");
+    localStorage.removeItem("userData");
   }
 
   return (
     <>
       {isLoggedIn ? (
-        <div className="navbar">
+        <div className={styles.navbar}>
           <h3>Jobfinder</h3>
-          <div className="login_btns_wrapper">
-            <p className="logout_option" onClick={() => isLogOut()}>
+          <div className={styles.login_btns_wrapper}>
+            <p className={styles.logout_option} onClick={() => isLogOut()}>
               Logout
             </p>
-            <p className="recruiter_name">Hello!, {userData.recruiterName}</p>
+            <p className={styles.recruiter_name}>Hello! {userData?.recruiterName}</p>
             <img src={recruiter_logo} alt="recruiter_logo"></img>
           </div>
           <img
             src={leftRectangle}
             alt="leftRectangle"
-            className="leftRectangle"
+            className={styles.leftRectangle}
           ></img>
           <img
             src={rightRectangle}
             alt="rightRectangle"
-            className="rightRectangle"
+            className={styles.rightRectangle}
           ></img>
           <img
             src={topRectangle}
             alt="topRectangle"
-            className="topRectangle"
+            className={styles.topRectangle}
           ></img>
         </div>
       ) : (
-        <div className="navbar">
+        <div className={styles.navbar}>
           <h3>Jobfinder</h3>
-          <div className="login_btns_wrapper">
-            <button className="loginBtn" onClick={() => navigate("/login")}>
+          <div className={styles.login_btns_wrapper}>
+            <button className={styles.loginBtn} onClick={() => navigate("/login")}>
               Login
             </button>
             <button
-              className="registerBtn"
+              className={styles.registerBtn}
               onClick={() => navigate("/register")}
             >
               Register
@@ -71,17 +60,17 @@ export default function Navbar({ userData }) {
           <img
             src={leftRectangle}
             alt="leftRectangle"
-            className="leftRectangle"
+            className={styles.leftRectangle}
           ></img>
           <img
             src={rightRectangle}
             alt="rightRectangle"
-            className="rightRectangle"
+            className={styles.rightRectangle}
           ></img>
           <img
             src={topRectangle}
             alt="topRectangle"
-            className="topRectangle"
+            className={styles.topRectangle}
           ></img>
         </div>
       )}

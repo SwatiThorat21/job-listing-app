@@ -14,10 +14,10 @@ export default function Home({ userData, isLoggedIn, setIsLoggedIn }) {
           setIsLoggedIn={setIsLoggedIn}
         />
         <div className="mainPage_container">
-          <Search isLoggedIn={isLoggedIn}/>
+          <Search isLoggedIn={isLoggedIn} />
           <div className="cards_container">
-            <Card />
-            <Card />
+            <Card isLoggedIn={isLoggedIn} />
+            <Card isLoggedIn={isLoggedIn} />
           </div>
         </div>
       </div>

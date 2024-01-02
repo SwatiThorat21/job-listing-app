@@ -7,6 +7,7 @@
   border-bottom-left-radius: 55px;
   border-bottom-right-radius: 62px;
   position: relative;
+  min-height: 16vh;
 }
 .navbar h3 {
   color: #ffffff;
@@ -43,15 +44,16 @@
 }
 .leftRectangle {
   position: absolute;
-  top: 3.65rem;
   left: 0;
-  width: 22%;
+  max-width: 22%;
+  bottom: 0;
 }
 .rightRectangle {
   position: absolute;
   top: 0;
   right: 60px;
-  width: 25%;
+  max-width: 25%;
+  min-height: 18vh;
 }
 .topRectangle {
   position: absolute;

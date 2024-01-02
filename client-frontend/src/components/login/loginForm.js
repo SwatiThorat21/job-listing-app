@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./LoginForm.module.css";
 import { login } from "../../apis/auth";
 
-export default function LoginForm({ setIsLoggedIn }) {
+export default function LoginForm({ setIsLoggedIn, setUserData }) {
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
     email: "",
@@ -21,11 +21,11 @@ export default function LoginForm({ setIsLoggedIn }) {
   }
   async function addLoginUser(email, password) {
     try {
-      await login(email, password);
+      await login(email, password, setUserData);
       setIsLoggedIn(true);
       navigate("/");
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   }
 

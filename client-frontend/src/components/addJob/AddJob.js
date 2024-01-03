@@ -1,5 +1,5 @@
 import job_bg from "../../images/job_bg.png";
-import styles from "./AddJob.module.css"
+import styles from "./AddJob.module.css";
 
 export default function AddJob() {
   return (
@@ -33,19 +33,23 @@ export default function AddJob() {
 
             <div className={styles.input_wrapper}>
               <label>Job Type</label>
-              <select>
-                <option value="Full-time">Full-time</option>
-                <option value="Part-time">Part-time</option>
-                <option value="Internship">Internship</option>
-              </select>
+              <div className={styles.select_wrapper}>
+                <select>
+                  <option value="Full-time">Full-time</option>
+                  <option value="Part-time">Part-time</option>
+                  <option value="Internship">Internship</option>
+                </select>
+              </div>
             </div>
 
             <div className={styles.input_wrapper}>
               <label>Remote/office</label>
-              <select>
-                <option value="Remote">Remote</option>
-                <option value="Part-time">Office</option>
-              </select>
+              <div className={styles.select_wrapper}>
+                <select>
+                  <option value="Remote">Remote</option>
+                  <option value="Part-time">Office</option>
+                </select>
+              </div>
             </div>
 
             <div className={styles.input_wrapper}>

@@ -34,7 +34,7 @@
 }
 label {
   font-family: "DM Sans", sans-serif;
-  font-size: 17px;
+  font-size: 16px;
 }
 .input_wrapper {
   display: flex;
@@ -42,7 +42,7 @@ label {
   margin: 0.5rem 0;
 }
 input[type="text"] {
-  padding: 0.4rem 1rem;
+  padding: 0.3rem 1rem;
   width: 60%;
   outline: none;
   border: 1.8px solid #c2c2c2;
@@ -81,8 +81,32 @@ textarea {
   font-family: "DM Sans", sans-serif;
   letter-spacing: 0.5px;
 }
-textarea::placeholder{
+textarea::placeholder {
   font-family: "DM Sans", sans-serif;
   font-size: 13px;
   color: #adadad;
+}
+.btn_wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+.cancel_btn{
+  padding: 0.4rem 2rem;
+  background-color: #ffffff;
+  border: 1.6px solid #CECECE;
+  color: #C2C2C2;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+.addJob_btn{
+  padding: 0.4rem 2rem;
+  background-color: #ED5353;
+  color: #ffffff;
+  outline: none;
+  border-radius: 3px;
+  border: none;
+  letter-spacing: 0.6px;
+  cursor: pointer;
 }

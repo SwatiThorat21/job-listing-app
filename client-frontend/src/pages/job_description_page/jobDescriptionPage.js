@@ -1,12 +1,14 @@
 import "./jobDescriptionPage.css";
 import Navbar from "../../components/navbar/Navbar";
-import JobDescription from "../../components/JobDescription/JobDescription"
+import JobDescription from "../../components/view_JobDescription/JobDescription";
 
 export default function JobDescriptionPage() {
   return (
     <>
-      <Navbar />
-      <JobDescription />
+      <div className="jd_page_container">
+        <Navbar />
+        <JobDescription />
+      </div>
     </>
   );
 }

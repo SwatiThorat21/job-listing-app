@@ -1,19 +1,17 @@
 import google from "../../images/Google.png";
 import stipend from "../../images/money-fill.png";
 import calender from "../../images/calender.png";
-import styles from "./JobDescription.module.css"
+import styles from "./JobDescription.module.css";
 
 export default function JobDescription() {
   return (
     <>
       <div className={styles.jd_containder}>
-        <div className={styles.jd_heading}>
-          <p>
-            WordPress Development work from home job/internship at Adyaka
-            Infosec Private Limited
-          </p>
+        <div className={styles.jd_heading_wrapper}>
+          <p> WordPress Development work from home job/internship </p>
+          <p> at Adyaka Infosec Private Limited </p>
         </div>
-        <div className={styles.job_details}>
+        <div className={styles.job_details_wrapper}>
           <div className={styles.top_details}>
             <p>1w ago</p>
             <p>.</p>
@@ -24,29 +22,39 @@ export default function JobDescription() {
           <div className={styles.job_title_container}>
             <div className={styles.title_wrapper}>
               <div className={styles.job_title}>WordPress Development</div>
-              <p>Banglore</p>
+              <p>Banglore | India</p>
             </div>
             <button className={styles.edit_btn}>Edit job</button>
           </div>
           <div className={styles.stipend_duration_wrapper}>
             <div>
               <div className={styles.flex_details}>
-                <img src={stipend} alt="stipend"></img>
-                <p>Stipend</p>
+                <img
+                  src={stipend}
+                  alt="stipend"
+                  style={{ width: "17px" }}
+                ></img>
+                <p style={{ color: "#999999", fontSize: "14px" }}>Stipend</p>
               </div>
-              <p>Rs 25000/month</p>
+              <p style={{ fontSize: "16px", color: "#595959" }}>
+                Rs 25000/month
+              </p>
             </div>
             <div>
               <div className={styles.flex_details}>
-                <img src={calender} alt="stipend"></img>
-                <p>Durtion</p>
+                <img
+                  src={calender}
+                  alt="stipend"
+                  style={{ width: "15px" }}
+                ></img>
+                <p style={{ color: "#999999", fontSize: "14px" }}>Durtion</p>
               </div>
-              <p>6 Months</p>
+              <p style={{ fontSize: "16px", color: "#595959" }}>6 Months</p>
             </div>
           </div>
           <div className={styles.description_wrapper}>
             <div className={styles.about_company}>
-              <h2>About company</h2>
+              <h2 className="about_title">About company</h2>
               <p>
                 We provide technology-based services to help businesses and
                 organizations achieve their goals. We offer a wide range of
@@ -58,7 +66,7 @@ export default function JobDescription() {
               </p>
             </div>
             <div className={styles.about_job}>
-              <h2>About the job/internship</h2>
+              <h2 className="about_title">About the job/internship</h2>
               <p>
                 We are looking for a responsible PHP/WordPress/Laravel/Shopify
                 Developer. He/She will be liable for managing services and
@@ -80,12 +88,15 @@ export default function JobDescription() {
               </p>
             </div>
             <div className={styles.skilld_required_wrapper}>
-              <div className={styles.skill}>CSS</div>
-              <div className={styles.skill}>HTML</div>
-              <div className={styles.skill}>WordPress</div>
+              <h2 className="about_title">Skills required</h2>
+              <div className={styles.skills_wrapper}>
+                <div className={styles.skill}>CSS</div>
+                <div className={styles.skill}>HTML</div>
+                <div className={styles.skill}>WordPress</div>
+              </div>
             </div>
             <div className={styles.additional_info}>
-              <h2>Additional Information</h2>
+              <h2 className="about_title">Additional Information</h2>
               <p>
                 Stipend structure: This is a performance-based internship. In
                 addition to the minimum-assured stipend, you will also be paid a

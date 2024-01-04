@@ -47,7 +47,7 @@ function App() {
             element={<Registration setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />}
           ></Route>
           <Route
-            path="/job-description"
+            path="/view-job"
             element={<JobDescriptionPage />}
           ></Route>
           <Route path="/add-job" element={<AddJobPage />}></Route>

@@ -1,0 +1,106 @@
+.jd_containder {
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+}
+.jd_heading_wrapper {
+  padding: 1rem;
+  font-family: "DM Sans", sans-serif;
+  font-size: 20px;
+  color: #000000;
+  text-align: center;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  width: 57rem;
+  position: relative;
+  top: -17px;
+}
+.jd_heading_wrapper p {
+  margin: 0.5rem;
+}
+.job_details_wrapper {
+  padding: 2rem;
+  font-family: "DM Sans", sans-serif;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  margin-top: 3.5rem;
+  width: 55rem;
+}
+p {
+  margin: 0;
+}
+.top_details {
+  display: flex;
+  align-items: center;
+  color: #999999;
+  font-size: 16px;
+  gap: 0.6rem;
+}
+.top_details img {
+  width: 24px;
+}
+.job_title_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.job_title {
+  font-size: 35px;
+  color: #000000;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+}
+.title_wrapper p {
+  font-size: 16px;
+  color: #ed5353;
+  margin: 0;
+}
+.edit_btn {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  outline: none;
+  background-color: #ed5353;
+  border-radius: 3px;
+  color: #ffffff;
+  font-family: "DM Sans", sans-serif;
+  cursor: pointer;
+}
+
+.flex_details {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "DM Sans", sans-serif;
+}
+.stipend_duration_wrapper {
+  display: flex;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+.about_company {
+  font-family: "DM Sans", sans-serif;
+}
+.about_title {
+  font-size: "18px";
+  color: "#000000";
+}
+.description_wrapper p {
+  color: #595959;
+  font-size: 16px;
+  line-height: 1.5rem;
+}
+.skills_wrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.skill{
+    background-color: #FFEEEE;
+    padding: 0.3rem 0.6rem;
+    border-radius: 18px;
+    color: #595959;
+    font-size: 14px;
+}

@@ -13,10 +13,12 @@ export async function createJob(
   jobDescription,
   aboutCompany,
   skills,
-  information
+  information, 
+  userData
 ) {
+  console.log(userData.jwToken)
   try {
-    const reqUrl = `${backendBaseUrl}/job-post`;
+    const reqUrl = `${backendBaseUrl}/job/job-post`;
     const reqPayload = {
       companyName: companyName,
       logoUrl: logoUrl,
@@ -30,8 +32,12 @@ export async function createJob(
       skills: skills,
       information: information,
     };
+    const headers = {
+      Authorization: `Bearer ${userData.jwToken}`,
+    }
+    console.log(`Bearer ${userData.jwToken}`)
     return await axios
-      .post(reqUrl, reqPayload)
+      .post(reqUrl, reqPayload, {headers})
       .then((response) => {
         console.log(response.data);
         return response.data;

@@ -1,9 +1,9 @@
-import AddJob from "../../components/addJob/AddJob"
+import AddJob from "../../components/addJob/AddJob";
 
-export default function addJobPage(){
-    return(
-        <>
-        <AddJob />
-        </>
-    )
+export default function addJobPage({ userData }) {
+  return (
+    <>
+      <AddJob userData={userData} />
+    </>
+  );
 }

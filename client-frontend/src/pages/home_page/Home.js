@@ -4,7 +4,6 @@ import Search from "../../components/search/Search";
 import Card from "../../components/cards/Card";
 
 export default function Home({ userData, isLoggedIn, setIsLoggedIn }) {
-  console.log(userData);
   return (
     <>
       <div className="home_container">
@@ -16,8 +15,8 @@ export default function Home({ userData, isLoggedIn, setIsLoggedIn }) {
         <div className="mainPage_container">
           <Search isLoggedIn={isLoggedIn} />
           <div className="cards_container">
-            <Card isLoggedIn={isLoggedIn} />
-            <Card isLoggedIn={isLoggedIn} />
+            <Card isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            <Card isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
           </div>
         </div>
       </div>

@@ -19,6 +19,7 @@ export default function LoginForm({ setIsLoggedIn, setUserData }) {
       };
     });
   }
+
   async function addLoginUser(email, password) {
     try {
       await login(email, password, setUserData);
@@ -60,7 +61,10 @@ export default function LoginForm({ setIsLoggedIn, setUserData }) {
         </button>
         <p className={styles.signup_link_para}>
           Don't have an account?
-          <span className={styles.signup_link} onClick={() => navigate("/register")}>
+          <span
+            className={styles.signup_link}
+            onClick={() => navigate("/register")}
+          >
             Sign Up
           </span>
         </p>

@@ -19,7 +19,7 @@ export default function Navbar({ userData, isLoggedIn, setIsLoggedIn }) {
     <>
       {isLoggedIn ? (
         <div className={styles.navbar}>
-          <h3>Jobfinder</h3>
+          <h3 onClick={()=>navigate("/")}>Jobfinder</h3>
           <div className={styles.login_btns_wrapper}>
             <p className={styles.logout_option} onClick={() => isLogOut()}>
               Logout

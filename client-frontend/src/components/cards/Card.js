@@ -5,10 +5,11 @@ import flag from "../../images/country_flag.png";
 import styles from "./Card.module.css";
 import { useNavigate } from "react-router-dom";
 
-export default function Card({ isLoggedIn }) {
+export default function Card({ isLoggedIn, setIsLoggedIn }) {
   const navigate = useNavigate();
-  function viewJobDetails(){
-    navigate('/view-job')
+  function viewJobDetails() {
+    navigate("/view-job");
+    setIsLoggedIn(true);
   }
   return (
     <>
@@ -58,7 +59,12 @@ export default function Card({ isLoggedIn }) {
               </div>
               <div className={styles.details_btn_wrapper}>
                 <button className={styles.editJob_btn}>Edit Job</button>
-                <button className={styles.viewDetails_btn} onClick={viewJobDetails}>View Details</button>
+                <button
+                  className={styles.viewDetails_btn}
+                  onClick={viewJobDetails}
+                >
+                  View Details
+                </button>
               </div>
             </div>
           </div>

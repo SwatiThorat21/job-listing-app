@@ -13,7 +13,6 @@ function App() {
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("userData");
-    console.log(storedUserData);
     if (storedUserData) {
       setUserData(JSON.parse(storedUserData));
     }
@@ -21,7 +20,6 @@ function App() {
 
   useEffect(() => {
     setIsLoggedIn(!!userData);
-    console.log(userData);
   }, [userData]);
 
   return (
@@ -40,17 +38,33 @@ function App() {
           ></Route>
           <Route
             path="/login"
-            element={<Login setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />}
+            element={
+              <Login setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />
+            }
           ></Route>
           <Route
             path="/register"
-            element={<Registration setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />}
+            element={
+              <Registration
+                setIsLoggedIn={setIsLoggedIn}
+                setUserData={setUserData}
+              />
+            }
           ></Route>
           <Route
             path="/view-job"
-            element={<JobDescriptionPage />}
+            element={
+              <JobDescriptionPage
+                userData={userData}
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+              />
+            }
           ></Route>
-          <Route path="/add-job" element={<AddJobPage />}></Route>
+          <Route
+            path="/add-job"
+            element={<AddJobPage userData={userData} />}
+          ></Route>
         </Routes>
       </Router>
     </>

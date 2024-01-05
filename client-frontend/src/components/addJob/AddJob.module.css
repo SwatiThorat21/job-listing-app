@@ -41,7 +41,7 @@ label {
   justify-content: space-between;
   margin: 0.5rem 0;
 }
-input[type="text"] {
+.addJob_input {
   padding: 0.3rem 1rem;
   width: 60%;
   outline: none;

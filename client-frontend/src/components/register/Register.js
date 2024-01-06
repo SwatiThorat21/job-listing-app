@@ -10,6 +10,15 @@ export default function Register({ setIsLoggedIn, setUserData }) {
     email: "",
     mobile: "",
     password: "",
+    agreeTerms: false,
+  });
+
+  const [errors, setErrors] = useState({
+    nameErr: false,
+    emailErr: false,
+    mobileErr: false,
+    passwordErr: false,
+    agreeTermsErr: false,
   });
 
   function handleChange(e) {
@@ -21,11 +30,37 @@ export default function Register({ setIsLoggedIn, setUserData }) {
       };
     });
   }
-  async function addRegisterUser(name, email, mobile, password) {
+  async function addRegisterUser(name, email, mobile, password, agreeTerms) {
+    const newErrors = {};
+    if (!name) {
+      newErrors.nameErr = true;
+    }
+
+    let mailFormat = /\S+@\S+\.\S+/;
+    if (!email || !email.match(mailFormat)) {
+      newErrors.emailErr = true;
+    }
+
+    let mobileFormat = /^\d{10}$/;
+    if (!mobile || !mobile.match(mobileFormat)) {
+      newErrors.mobileErr = true;
+    }
+
+    if (!password || password.length < 8 || password.length > 15) {
+      newErrors.passwordErr = true;
+    }
+
+    if (!agreeTerms) {
+      newErrors.agreeTermsErr = true;
+    }
+    console.log(newErrors)
+    setErrors(newErrors);
     try {
-      await register(name, email, mobile, password, setUserData);
-      setIsLoggedIn(true);
-      navigate("/");
+      if (Object.keys(newErrors).length === 0) {
+        await register(name, email, mobile, password, agreeTerms, setUserData);
+        setIsLoggedIn(true);
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -44,6 +79,9 @@ export default function Register({ setIsLoggedIn, setUserData }) {
             onChange={handleChange}
             value={registerData.name}
           ></input>
+          {errors.nameErr && (
+            <label className={styles.errorMsg}>Please enter name !</label>
+          )}
           <input
             type="email"
             placeholder="Email"
@@ -52,6 +90,9 @@ export default function Register({ setIsLoggedIn, setUserData }) {
             onChange={handleChange}
             value={registerData.email}
           ></input>
+          {errors.emailErr && (
+            <label className={styles.errorMsg}>Invalid email !</label>
+          )}
           <input
             type="text"
             placeholder="Mobile"
@@ -60,6 +101,11 @@ export default function Register({ setIsLoggedIn, setUserData }) {
             onChange={handleChange}
             value={registerData.mobile}
           ></input>
+          {errors.mobileErr && (
+            <label className={styles.errorMsg}>
+              Please enter valid mobile number !
+            </label>
+          )}
           <input
             type="password"
             placeholder="Password"
@@ -68,12 +114,18 @@ export default function Register({ setIsLoggedIn, setUserData }) {
             onChange={handleChange}
             value={registerData.password}
           ></input>
+          {errors.passwordErr && (
+            <label className={styles.errorMsg}>Invalid password !</label>
+          )}
           <div className={styles.conditions_check_wrapper}>
             <input type="checkbox"></input>
             <label className={styles.conditions_check}>
               By creating an account, I agree to our terms of use and privacy
             </label>
           </div>
+          {errors.agreeTermsErr && (
+            <label className={styles.errorMsg}>Check this box if you want to proceed !</label>
+          )}
         </div>
         <button
           className={styles.register_btn}

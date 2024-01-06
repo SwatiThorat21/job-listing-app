@@ -4,6 +4,7 @@ const JobPost = require("../models/jobs");
 const isLoggedIn = require("../middlewares/isLoggedIn");
 
 router.post("/job-post", isLoggedIn, async (req, res) => {
+  console.log("req.body")
   try {
     const {
       companyName,
@@ -23,7 +24,6 @@ router.post("/job-post", isLoggedIn, async (req, res) => {
     if (typeof skills === "string") {
       skillsArray = skills.split(",").map((skill) => skill.trim());
     }
-
     await JobPost.create({
       companyName,
       logoUrl,

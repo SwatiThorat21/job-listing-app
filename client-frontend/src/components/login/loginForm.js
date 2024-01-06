@@ -10,6 +10,11 @@ export default function LoginForm({ setIsLoggedIn, setUserData }) {
     password: "",
   });
 
+  const [errors, setErrors] = useState({
+    emailErr: false,
+    passwordErr: false,
+  });
+
   function handleChange(e) {
     const { name, value } = e.target;
     setLoginData((prevData) => {
@@ -21,10 +26,21 @@ export default function LoginForm({ setIsLoggedIn, setUserData }) {
   }
 
   async function addLoginUser(email, password) {
+    const newErrors = {};
+    let mailFormat = /\S+@\S+\.\S+/;
+    if (!email || !email.match(mailFormat)) {
+      newErrors.emailErr = true;
+    }
+    if (!password || password.length < 8 || password.length > 15) {
+      newErrors.passwordErr = true;
+    }
+    setErrors(newErrors);
     try {
-      await login(email, password, setUserData);
-      setIsLoggedIn(true);
-      navigate("/");
+      if (Object.keys(newErrors).length === 0) {
+        await login(email, password, setUserData);
+        navigate("/");
+        setIsLoggedIn(true);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -44,6 +60,9 @@ export default function LoginForm({ setIsLoggedIn, setUserData }) {
             onChange={handleChange}
             value={loginData.email}
           ></input>
+          {errors.emailErr && (
+            <label className={styles.errorMsg}>Invalid email !</label>
+          )}
           <input
             type="password"
             placeholder="Password"
@@ -51,7 +70,11 @@ export default function LoginForm({ setIsLoggedIn, setUserData }) {
             name="password"
             onChange={handleChange}
             value={loginData.password}
+            style={{marginTop:"0.7rem"}}
           ></input>
+          {errors.passwordErr && (
+            <label className={styles.errorMsg}>Invalid password !</label>
+          )}
         </div>
         <button
           className={styles.login_btn}

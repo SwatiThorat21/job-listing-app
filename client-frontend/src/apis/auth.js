@@ -12,19 +12,25 @@ export async function login(email, password, setUserData) {
     return await axios
       .post(reqUrl, reqPayload)
       .then((response) => {
-        localStorage.setItem("token", response.data.jwToken);
         localStorage.setItem("userData", JSON.stringify(response.data));
         setUserData(response.data);
         return response.data;
       })
       .catch((error) => console.log(error));
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
     throw error;
   }
 }
 
-export async function register(name, email, mobile, password, setUserData) {
+export async function register(
+  name,
+  email,
+  mobile,
+  password,
+  agreeTerms,
+  setUserData
+) {
   try {
     const reqUrl = `${backendBaseUrl}/auth/register`;
     const reqPayload = {
@@ -32,6 +38,7 @@ export async function register(name, email, mobile, password, setUserData) {
       email: email,
       mobile: mobile,
       password: password,
+      agreeTerms: false,
     };
     return await axios
       .post(reqUrl, reqPayload)

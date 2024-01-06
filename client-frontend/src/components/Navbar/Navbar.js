@@ -11,7 +11,6 @@ export default function Navbar({ userData, isLoggedIn, setIsLoggedIn }) {
   function isLogOut() {
     setIsLoggedIn(false);
     navigate("/login");
-    localStorage.removeItem("token");
     localStorage.removeItem("userData");
   }
 

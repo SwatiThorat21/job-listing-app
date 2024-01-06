@@ -4,16 +4,16 @@
     height: 100vh;
   }
   .register_form_container h2 {
-    font-size: 40px;
+    font-size: 36px;
     margin: 0;
-    margin-top: 5rem;
+    margin-top: 1rem;
     letter-spacing: 1px;
   }
   .login_heading {
     color: #525252;
-    font-size: 20px;
+    font-size: 16px;
     margin: 0;
-    margin-bottom: 2rem;
+    margin-bottom: 0.6rem;
   }
   .input_wrapper {
     display: flex;
@@ -23,7 +23,7 @@
     border: 2px solid #c2c2c2;
     outline: none;
     padding: 0.7rem 1.2rem;
-    margin-bottom: 0.6rem;
+    margin-top: 0.6rem;
     border-radius: 5px;
   }
   input::placeholder{
@@ -35,6 +35,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
+    margin-top: 0.6rem;
   }
   .conditions_check {
     font-size: 14px;
@@ -61,4 +62,10 @@
     margin-left: 5px;
     border-bottom: 1px solid #000000;
     cursor: pointer;
+  }
+  .errorMsg{
+    color: rgb(206, 7, 7);
+    font-size: 14px;
+    font-family: "DM Sans", sans-serif;
+    margin: 0.2rem 0;
   }

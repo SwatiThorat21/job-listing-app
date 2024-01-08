@@ -28,7 +28,6 @@ export async function register(
   email,
   mobile,
   password,
-  agreeTerms,
   setUserData
 ) {
   try {
@@ -38,7 +37,6 @@ export async function register(
       email: email,
       mobile: mobile,
       password: password,
-      agreeTerms: false,
     };
     return await axios
       .post(reqUrl, reqPayload)

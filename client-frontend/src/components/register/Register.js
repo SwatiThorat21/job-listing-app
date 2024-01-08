@@ -10,7 +10,7 @@ export default function Register({ setIsLoggedIn, setUserData }) {
     email: "",
     mobile: "",
     password: "",
-    agreeTerms: false,
+    agreeTerms: true,
   });
 
   const [errors, setErrors] = useState({
@@ -18,19 +18,19 @@ export default function Register({ setIsLoggedIn, setUserData }) {
     emailErr: false,
     mobileErr: false,
     passwordErr: false,
-    agreeTermsErr: false,
   });
 
   function handleChange(e) {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setRegisterData((prevData) => {
       return {
         ...prevData,
-        [name]: value,
+        [name]: type === "checkbox" ? checked : value,
       };
     });
   }
-  async function addRegisterUser(name, email, mobile, password, agreeTerms) {
+
+  async function addRegisterUser(name, email, mobile, password) {
     const newErrors = {};
     if (!name) {
       newErrors.nameErr = true;
@@ -49,15 +49,10 @@ export default function Register({ setIsLoggedIn, setUserData }) {
     if (!password || password.length < 8 || password.length > 15) {
       newErrors.passwordErr = true;
     }
-
-    if (!agreeTerms) {
-      newErrors.agreeTermsErr = true;
-    }
-    console.log(newErrors)
     setErrors(newErrors);
     try {
-      if (Object.keys(newErrors).length === 0) {
-        await register(name, email, mobile, password, agreeTerms, setUserData);
+      if (Object.keys(newErrors).length === 0 && registerData.agreeTerms) {
+        await register(name, email, mobile, password, setUserData);
         setIsLoggedIn(true);
         navigate("/");
       }
@@ -118,13 +113,20 @@ export default function Register({ setIsLoggedIn, setUserData }) {
             <label className={styles.errorMsg}>Invalid password !</label>
           )}
           <div className={styles.conditions_check_wrapper}>
-            <input type="checkbox"></input>
+            <input
+              type="checkbox"
+              checked={registerData.agreeTerms}
+              onChange={handleChange}
+              name="agreeTerms"
+            ></input>
             <label className={styles.conditions_check}>
               By creating an account, I agree to our terms of use and privacy
             </label>
           </div>
-          {errors.agreeTermsErr && (
-            <label className={styles.errorMsg}>Check this box if you want to proceed !</label>
+          {!registerData.agreeTerms && (
+            <label className={styles.errorMsg}>
+              Check this box if you want to proceed !
+            </label>
           )}
         </div>
         <button

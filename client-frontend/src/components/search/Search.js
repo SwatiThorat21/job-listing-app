@@ -16,7 +16,7 @@ export default function Search({ isLoggedIn }) {
     location,
     jobDescription,
     aboutCompany,
-    skills,
+    skillsRequired,
     information
   ) {
     try {
@@ -30,7 +30,7 @@ export default function Search({ isLoggedIn }) {
         location,
         jobDescription,
         aboutCompany,
-        skills,
+        skillsRequired,
         information
       );
       navigate("add-job");
@@ -51,7 +51,7 @@ export default function Search({ isLoggedIn }) {
           <div className={styles.searchbySkills_clear_container}>
             <div className={styles.searchbySkills_wrapper}>
               <select className={styles.select}>
-                <option value="skills">Skills</option>
+                <option value="skillsRequired">Skills</option>
               </select>
               <div className={styles.skills_wrapper}>
                 <div className={styles.skill_withClose_div}>

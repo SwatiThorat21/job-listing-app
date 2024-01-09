@@ -12,9 +12,10 @@ export async function createJob(
   location,
   jobDescription,
   aboutCompany,
-  skills,
+  skillsRequired,
   information,
-  userData
+  userData,
+  setJobsData
 ) {
   if (userData === undefined) return;
   try {
@@ -29,17 +30,20 @@ export async function createJob(
       location: location,
       jobDescription: jobDescription,
       aboutCompany: aboutCompany,
-      skills: skills,
+      skillsRequired: skillsRequired,
       information: information,
     };
     const headers = {
       jwtoken: `${userData.jwToken}`,
     };
-  
     return await axios
       .post(reqUrl, reqPayload, { headers })
       .then((response) => {
-        console.log(response.data);
+        setJobsData((prevData) => {
+          const updatedJObsData = [...prevData, response.data.data];
+          localStorage.setItem("jobsdata", JSON.stringify(updatedJObsData));
+          return updatedJObsData;
+        });
         return response.data;
       })
       .catch((error) => console.log(error));

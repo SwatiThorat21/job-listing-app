@@ -10,6 +10,8 @@ import AddJobPage from "./pages/addJob_page/AddJob_page.js";
 function App() {
   const [userData, setUserData] = useState(undefined);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [jobsData, setJobsData] = useState([]);
+  // console.log(jobsData)
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("userData");
@@ -22,6 +24,13 @@ function App() {
     setIsLoggedIn(!!userData);
   }, [userData]);
 
+  useEffect(() => {
+    const storedJobsData = localStorage.getItem('jobsdata');
+    if (storedJobsData) {
+      setJobsData(JSON.parse(storedJobsData));
+    }
+  }, []);
+
   return (
     <>
       <Router>
@@ -33,6 +42,7 @@ function App() {
                 userData={userData}
                 isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
+                jobsData={jobsData}
               />
             }
           ></Route>
@@ -63,7 +73,9 @@ function App() {
           ></Route>
           <Route
             path="/add-job"
-            element={<AddJobPage userData={userData} />}
+            element={
+              <AddJobPage userData={userData} setJobsData={setJobsData} />
+            }
           ></Route>
         </Routes>
       </Router>

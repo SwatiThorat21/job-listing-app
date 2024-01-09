@@ -4,7 +4,7 @@ import styles from "./AddJob.module.css";
 import { createJob } from "../../apis/jobs";
 import { useNavigate } from "react-router-dom";
 
-export default function AddJob({ userData }) {
+export default function AddJob({ userData, setJobsData }) {
   const navigate = useNavigate();
   const [jobDetails, setJobDetails] = useState({
     companyName: "",
@@ -22,10 +22,15 @@ export default function AddJob({ userData }) {
 
   function handleChange(e) {
     const { name, value } = e.target;
+
+    const skillsArray =
+      name === "skillsRequired"
+        ? value.split(",").map((skill) => skill.trim())
+        : value;
     setJobDetails((prevData) => {
       return {
         ...prevData,
-        [name]: value,
+        [name]: skillsArray,
       };
     });
   }
@@ -40,7 +45,7 @@ export default function AddJob({ userData }) {
     location,
     jobDescription,
     aboutCompany,
-    skills,
+    skillsRequired,
     information
   ) {
     try {
@@ -54,15 +59,18 @@ export default function AddJob({ userData }) {
         location,
         jobDescription,
         aboutCompany,
-        skills,
-        information, 
-        userData
+        skillsRequired,
+        information,
+        userData,
+        setJobsData
       );
       navigate("/");
     } catch (error) {
       console.log(error);
     }
   }
+
+  console.log(jobDetails);
   return (
     <>
       <div className={styles.addJob_container}>
@@ -217,7 +225,7 @@ export default function AddJob({ userData }) {
                   jobDetails.location,
                   jobDetails.jobDescription,
                   jobDetails.aboutCompany,
-                  jobDetails.skills,
+                  jobDetails.skillsRequired,
                   jobDetails.information
                 )
               }

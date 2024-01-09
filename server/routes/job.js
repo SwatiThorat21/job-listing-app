@@ -4,7 +4,6 @@ const JobPost = require("../models/jobs");
 const isLoggedIn = require("../middlewares/isLoggedIn");
 
 router.post("/job-post", isLoggedIn, async (req, res) => {
-  console.log("req.body")
   try {
     const {
       companyName,
@@ -16,14 +15,15 @@ router.post("/job-post", isLoggedIn, async (req, res) => {
       location,
       jobDescription,
       aboutCompany,
-      skills,
+      skillsRequired,
       information,
     } = req.body;
 
-    let skillsArray = skills;
-    if (typeof skills === "string") {
-      skillsArray = skills.split(",").map((skill) => skill.trim());
+    let skillsArray = skillsRequired;
+    if (typeof skillsRequired === "string") {
+      skillsArray = skillsRequired.split(",").map((skill) => skill.trim());
     }
+
     await JobPost.create({
       companyName,
       logoUrl,
@@ -34,13 +34,15 @@ router.post("/job-post", isLoggedIn, async (req, res) => {
       location,
       jobDescription,
       aboutCompany,
-      skills: skillsArray,
+      skillsRequired: skillsArray,
       information,
     });
     res.status(200).json({
       status: "SUCCESS",
       message: "You have sucessfully created Job!",
+      data: req.body,
     });
+ 
   } catch (error) {
     res.status(500).json({
       status: "FAILED",
@@ -62,7 +64,7 @@ router.patch("/job-post/:id", async (req, res) => {
       location,
       jobDescription,
       aboutCompany,
-      skills,
+      skillsRequired,
       information,
     } = req.body;
 
@@ -76,7 +78,7 @@ router.patch("/job-post/:id", async (req, res) => {
       location,
       jobDescription,
       aboutCompany,
-      skills,
+      skillsRequired,
       information,
     });
     res.json({
@@ -92,14 +94,14 @@ router.patch("/job-post/:id", async (req, res) => {
 });
 
 router.get("/job-post", async (req, res) => {
-  const { jobPosition, skills } = req.query;
+  const { jobPosition, skillsRequired } = req.query;
   try {
     let query = {};
     if (jobPosition) {
       query.jobPosition = jobPosition;
     }
-    if (skills) {
-      query.skills = { $in: skills.split("&") };
+    if (skillsRequired) {
+      query.skillsRequired = { $in: skillsRequired.split("&") };
     }
     const jobs = await JobPost.find(query).sort({ createdAt: -1 });
     res.json({ jobs });

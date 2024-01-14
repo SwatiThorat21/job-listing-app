@@ -70,7 +70,6 @@ export default function AddJob({ userData, setJobsData }) {
     }
   }
 
-  console.log(jobDetails);
   return (
     <>
       <div className={styles.addJob_container}>

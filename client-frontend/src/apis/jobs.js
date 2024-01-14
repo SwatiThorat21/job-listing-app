@@ -40,11 +40,49 @@ export async function createJob(
       .post(reqUrl, reqPayload, { headers })
       .then((response) => {
         setJobsData((prevData) => {
-          const updatedJObsData = [...prevData, response.data.data];
-          localStorage.setItem("jobsdata", JSON.stringify(updatedJObsData));
-          return updatedJObsData;
+          return [...prevData, response.data.data];
         });
+        console.log(response.data);
         return response.data;
+      })
+      .catch((error) => console.log(error));
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+}
+
+export async function getAllJobs() {
+  try {
+    const reqUrl = `${backendBaseUrl}/job/job-posts`;
+    return await axios
+      .get(reqUrl)
+      .then((response) => {
+        console.log(response.data);
+        return response.data;
+      })
+      .catch((error) => console.log(error));
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function getJobDataById(id, jwToken) {
+
+  if(!jwToken) return
+  try {
+    const reqUrl = `${backendBaseUrl}/job/job-post/${id}`;
+    const reqPayload = {
+      id: id,
+    };
+    const headers = {
+      jwtoken: `${jwToken}`,
+    };
+    return await axios
+      .get(reqUrl, reqPayload, { headers })
+      .then((response) => {
+        console.log(response.data);
       })
       .catch((error) => console.log(error));
   } catch (error) {

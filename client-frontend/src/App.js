@@ -6,12 +6,12 @@ import Login from "./pages/login_page/LoginPage.js";
 import Home from "./pages/home_page/Home.js";
 import JobDescriptionPage from "./pages/job_description_page/jobDescriptionPage.js";
 import AddJobPage from "./pages/addJob_page/AddJob_page.js";
+import { getAllJobs } from "./apis/jobs.js";
 
 function App() {
   const [userData, setUserData] = useState(undefined);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [jobsData, setJobsData] = useState([]);
-  // console.log(jobsData)
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("userData");
@@ -25,33 +25,46 @@ function App() {
   }, [userData]);
 
   useEffect(() => {
-    const storedJobsData = localStorage.getItem('jobsdata');
-    if (storedJobsData) {
-      setJobsData(JSON.parse(storedJobsData));
-    }
+    const fetchData = async () => {
+      try {
+        const jobs = await getAllJobs();
+        setJobsData(jobs);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    fetchData();
   }, []);
+
+  console.log(jobsData)
 
   return (
     <>
       <Router>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                userData={userData}
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-                jobsData={jobsData}
-              />
-            }
-          ></Route>
-          <Route
-            path="/login"
-            element={
-              <Login setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />
-            }
-          ></Route>
+          {userData && userData.jwToken ? (
+            <Route
+              path="/"
+              element={
+                <Home
+                  userData={userData}
+                  isLoggedIn={isLoggedIn}
+                  setIsLoggedIn={setIsLoggedIn}
+                  jobsData={jobsData}
+                />
+              }
+            ></Route>
+          ) : (
+            <Route
+              path="/login"
+              element={
+                <Login
+                  setIsLoggedIn={setIsLoggedIn}
+                  setUserData={setUserData}
+                />
+              }
+            ></Route>
+          )}
           <Route
             path="/register"
             element={
@@ -68,6 +81,7 @@ function App() {
                 userData={userData}
                 isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
+                jobsData={jobsData}
               />
             }
           ></Route>

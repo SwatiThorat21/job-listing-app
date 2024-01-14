@@ -3,19 +3,32 @@ import rupeeIcon from "../../images/rupee_logo.png";
 import flag from "../../images/country_flag.png";
 import styles from "./Card.module.css";
 import { useNavigate } from "react-router-dom";
+import { getJobDataById } from "../../apis/jobs";
 
-export default function Card({ isLoggedIn, setIsLoggedIn, jobsData }) {
+export default function Card({
+  isLoggedIn,
+  setIsLoggedIn,
+  jobsData,
+  userData,
+}) {
   const navigate = useNavigate();
-  function viewJobDetails() {
+  if (!jobsData) return;
+ 
+  function viewJobDetails(index) {
     navigate("/view-job");
     setIsLoggedIn(true);
+    getJobDataById(jobsData.jobs[index]._id, userData.jwToken);
   }
+
   return (
     <>
-      {jobsData &&
-        jobsData.map((jobData, index) => {
+      {jobsData.jobs &&
+        jobsData.jobs.map((jobData, index) => {
           return (
-            <div className={jobsData ? styles.jobCard_container : ""} key={index}>
+            <div
+              className={jobsData ? styles.jobCard_container : ""}
+              key={index}
+            >
               <div className={styles.job_card}>
                 <div className={styles.job_details_container}>
                   <div className={styles.logo_container}>
@@ -57,10 +70,12 @@ export default function Card({ isLoggedIn, setIsLoggedIn, jobsData }) {
                 </div>
                 <div className={styles.skills_wrapper}>
                   <div className={styles.skills}>
-                    <div className={styles.skill}>Frontend</div>
-                    <div className={styles.skill}>HTML</div>
-                    <div className={styles.skill}>CSS</div>
-                    <div className={styles.skill}>React</div>
+                    {jobData.skillsRequired &&
+                      jobData.skillsRequired.map((skill, skillIndex) => (
+                        <div key={skillIndex} className={styles.skill}>
+                          {skill}
+                        </div>
+                      ))}
                   </div>
                   <div className={styles.details_btn_wrapper}>
                     {isLoggedIn ? (
@@ -70,7 +85,7 @@ export default function Card({ isLoggedIn, setIsLoggedIn, jobsData }) {
                     )}
                     <button
                       className={styles.viewDetails_btn}
-                      onClick={viewJobDetails}
+                      onClick={()=>viewJobDetails(index)}
                     >
                       View Details
                     </button>

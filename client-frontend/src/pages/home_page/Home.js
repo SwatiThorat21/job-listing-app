@@ -17,7 +17,7 @@ export default function Home({ userData, isLoggedIn, setIsLoggedIn, jobsData }) 
           <Search isLoggedIn={isLoggedIn} />
 
           <div className="cards_container">
-            <Card isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} jobsData={jobsData}/>
+            <Card isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} jobsData={jobsData} userData={userData}/>
           </div>
         </div>
       </div>

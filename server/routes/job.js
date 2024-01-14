@@ -113,6 +113,18 @@ router.get("/job-post", async (req, res) => {
   }
 });
 
+router.get("/job-posts", async (req, res) => {
+  try {
+    const jobs = await JobPost.find().sort({ createdAt: -1 });
+    res.json({ jobs });
+  } catch (error) {
+    res.json({
+      status: "FAILED",
+      message: error.message,
+    });
+  }
+});
+
 router.get("/job-post/:id", async (req, res) => {
   try {
     const { id } = req.params;

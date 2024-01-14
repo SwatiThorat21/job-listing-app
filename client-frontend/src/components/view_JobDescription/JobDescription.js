@@ -1,31 +1,34 @@
-import google from "../../images/Google.png";
-import stipend from "../../images/money-fill.png";
-import calender from "../../images/calender.png";
-import styles from "./JobDescription.module.css";
+// import google from "../../images/Google.png";
+// import stipend from "../../images/money-fill.png";
+// import calender from "../../images/calender.png";
+// import styles from "./JobDescription.module.css";
 
-export default function JobDescription({ jobsData }) {
+export default function JobDescription({ jobDetails }) {
+  if (!jobDetails) return;
+  console.log(jobDetails)
   return (
     <>
-      <div className={styles.jd_containder}>
+      {/* <div className={styles.jd_containder}>
         <div className={styles.jd_heading_wrapper}>
           <p>
             {" "}
-            {jobsData.jobPosition} {jobsData.remote} job/{jobsData.jobType}
+            {jobDetails.job.jobPosition} {jobDetails.job.remote} job/
+            {jobDetails.job.jobType}
           </p>
-          <p> at {jobsData.companyName} </p>
+          <p> at {jobDetails.job.companyName} </p>
         </div>
         <div className={styles.job_details_wrapper}>
           <div className={styles.top_details}>
             <p>1w ago</p>
             <p>.</p>
-            <p>{jobsData.jobType}e</p>
+            <p>{jobDetails.job.jobType}e</p>
             <img src={google} alt={styles.google}></img>
             <p>Google</p>
           </div>
           <div className={styles.job_title_container}>
             <div className={styles.title_wrapper}>
-              <div className={styles.job_title}>{jobsData.jobPosition}</div>
-              <p>{jobsData.location} | India</p>
+              <div className={styles.job_title}>{jobDetails.job.jobPosition}</div>
+              <p>{jobDetails.job.location} | India</p>
             </div>
             <button className={styles.edit_btn}>Edit job</button>
           </div>
@@ -40,7 +43,7 @@ export default function JobDescription({ jobsData }) {
                 <p style={{ color: "#999999", fontSize: "14px" }}>Stipend</p>
               </div>
               <p style={{ fontSize: "16px", color: "#595959" }}>
-                Rs {jobsData.monthlySalary}/month
+                Rs {jobDetails.job.monthlySalary}/month
               </p>
             </div>
             <div>
@@ -58,27 +61,27 @@ export default function JobDescription({ jobsData }) {
           <div className={styles.description_wrapper}>
             <div className={styles.about_company}>
               <h2 className="about_title">About company</h2>
-              <p>{jobsData.aboutCompany}</p>
+              <p>{jobDetails.job.aboutCompany}</p>
             </div>
             <div className={styles.about_job}>
               <h2 className="about_title">About the job/internship</h2>
-              <p>{jobsData.jobDescription}</p>
+              <p>{jobDetails.job.jobDescription}</p>
             </div>
             <div className={styles.skilld_required_wrapper}>
               <h2 className="about_title">Skills required</h2>
               <div className={styles.skills_wrapper}>
-                {jobsData.skillsRequired?.map((skill) => {
+                {jobDetails.job.skillsRequired?.map((skill) => {
                   return <div className={styles.skill}>{skill}</div>;
                 })}
               </div>
             </div>
             <div className={styles.additional_info}>
               <h2 className="about_title">Additional Information</h2>
-              <p>{jobsData.information}</p>
+              <p>{jobDetails.job.information}</p>
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

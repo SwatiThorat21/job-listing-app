@@ -68,9 +68,8 @@ export async function getAllJobs() {
   }
 }
 
-export async function getJobDataById(id, jwToken) {
-
-  if(!jwToken) return
+export async function getJobDataById(id, jwToken, setJobDetails) {
+  if (!jwToken) return;
   try {
     const reqUrl = `${backendBaseUrl}/job/job-post/${id}`;
     const reqPayload = {
@@ -82,7 +81,7 @@ export async function getJobDataById(id, jwToken) {
     return await axios
       .get(reqUrl, reqPayload, { headers })
       .then((response) => {
-        console.log(response.data);
+        setJobDetails(response.data.job);
       })
       .catch((error) => console.log(error));
   } catch (error) {

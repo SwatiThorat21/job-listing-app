@@ -3,7 +3,13 @@ import Navbar from "../../components/navbar/Navbar";
 import Search from "../../components/search/Search";
 import Card from "../../components/cards/Card";
 
-export default function Home({ userData, isLoggedIn, setIsLoggedIn, jobsData }) {
+export default function Home({
+  userData,
+  isLoggedIn,
+  setIsLoggedIn,
+  jobsData,
+  setJobDetails,
+}) {
   return (
     <>
       <div className="home_container">
@@ -17,7 +23,13 @@ export default function Home({ userData, isLoggedIn, setIsLoggedIn, jobsData }) 
           <Search isLoggedIn={isLoggedIn} />
 
           <div className="cards_container">
-            <Card isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} jobsData={jobsData} userData={userData}/>
+            <Card
+              isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
+              jobsData={jobsData}
+              userData={userData}
+              setJobDetails={setJobDetails}
+            />
           </div>
         </div>
       </div>

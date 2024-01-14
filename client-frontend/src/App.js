@@ -7,11 +7,13 @@ import Home from "./pages/home_page/Home.js";
 import JobDescriptionPage from "./pages/job_description_page/jobDescriptionPage.js";
 import AddJobPage from "./pages/addJob_page/AddJob_page.js";
 import { getAllJobs } from "./apis/jobs.js";
+// import { getJobDataById } from "./apis/jobs.js";
 
 function App() {
   const [userData, setUserData] = useState(undefined);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [jobsData, setJobsData] = useState([]);
+  const [jobDetails, setJobDetails] = useState({});
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("userData");
@@ -36,7 +38,7 @@ function App() {
     fetchData();
   }, []);
 
-  console.log(jobsData)
+  console.log(jobDetails)
 
   return (
     <>
@@ -51,6 +53,7 @@ function App() {
                   isLoggedIn={isLoggedIn}
                   setIsLoggedIn={setIsLoggedIn}
                   jobsData={jobsData}
+                  setJobDetails={setJobDetails}
                 />
               }
             ></Route>
@@ -81,7 +84,7 @@ function App() {
                 userData={userData}
                 isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
-                jobsData={jobsData}
+                jobDetails={jobDetails}
               />
             }
           ></Route>

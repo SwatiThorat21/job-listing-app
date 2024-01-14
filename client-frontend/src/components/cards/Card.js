@@ -10,14 +10,15 @@ export default function Card({
   setIsLoggedIn,
   jobsData,
   userData,
+  setJobDetails,
 }) {
   const navigate = useNavigate();
   if (!jobsData) return;
- 
+
   function viewJobDetails(index) {
     navigate("/view-job");
     setIsLoggedIn(true);
-    getJobDataById(jobsData.jobs[index]._id, userData.jwToken);
+    getJobDataById(jobsData.jobs[index]._id, userData.jwToken, setJobDetails);
   }
 
   return (
@@ -85,7 +86,7 @@ export default function Card({
                     )}
                     <button
                       className={styles.viewDetails_btn}
-                      onClick={()=>viewJobDetails(index)}
+                      onClick={() => viewJobDetails(index)}
                     >
                       View Details
                     </button>

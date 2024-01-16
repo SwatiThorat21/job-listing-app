@@ -9,6 +9,7 @@ export default function Home({
   setIsLoggedIn,
   jobsData,
   setJobDetails,
+  jobDetails,
 }) {
   return (
     <>
@@ -29,6 +30,7 @@ export default function Home({
               jobsData={jobsData}
               userData={userData}
               setJobDetails={setJobDetails}
+              jobDetails={jobDetails}
             />
           </div>
         </div>

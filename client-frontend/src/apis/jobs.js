@@ -42,7 +42,6 @@ export async function createJob(
         setJobsData((prevData) => {
           return [...prevData, response.data.data];
         });
-        console.log(response.data);
         return response.data;
       })
       .catch((error) => console.log(error));
@@ -58,7 +57,6 @@ export async function getAllJobs() {
     return await axios
       .get(reqUrl)
       .then((response) => {
-        console.log(response.data);
         return response.data;
       })
       .catch((error) => console.log(error));
@@ -81,6 +79,7 @@ export async function getJobDataById(id, jwToken, setJobDetails) {
     return await axios
       .get(reqUrl, reqPayload, { headers })
       .then((response) => {
+        localStorage.setItem("jobDetails", JSON.stringify(response.data.job));
         setJobDetails(response.data.job);
       })
       .catch((error) => console.log(error));

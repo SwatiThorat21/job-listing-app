@@ -11,12 +11,13 @@ export default function Card({
   jobsData,
   userData,
   setJobDetails,
+  jobDetails,
 }) {
   const navigate = useNavigate();
   if (!jobsData) return;
 
   function viewJobDetails(index) {
-    navigate("/view-job");
+    navigate(`/view-job/${jobDetails._id}`);
     setIsLoggedIn(true);
     getJobDataById(jobsData.jobs[index]._id, userData.jwToken, setJobDetails);
   }

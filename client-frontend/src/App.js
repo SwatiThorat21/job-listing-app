@@ -7,7 +7,6 @@ import Home from "./pages/home_page/Home.js";
 import JobDescriptionPage from "./pages/job_description_page/jobDescriptionPage.js";
 import AddJobPage from "./pages/addJob_page/AddJob_page.js";
 import { getAllJobs } from "./apis/jobs.js";
-// import { getJobDataById } from "./apis/jobs.js";
 
 function App() {
   const [userData, setUserData] = useState(undefined);
@@ -38,7 +37,12 @@ function App() {
     fetchData();
   }, []);
 
-  console.log(jobDetails)
+  useEffect(() => {
+    const storedJobDetails = localStorage.getItem("jobDetails");
+    if (storedJobDetails) {
+      setJobDetails(JSON.parse(storedJobDetails));
+    }
+  }, []);
 
   return (
     <>
@@ -54,6 +58,7 @@ function App() {
                   setIsLoggedIn={setIsLoggedIn}
                   jobsData={jobsData}
                   setJobDetails={setJobDetails}
+                  jobDetails={jobDetails}
                 />
               }
             ></Route>
@@ -78,7 +83,7 @@ function App() {
             }
           ></Route>
           <Route
-            path="/view-job"
+            path="/view-job/:id"
             element={
               <JobDescriptionPage
                 userData={userData}

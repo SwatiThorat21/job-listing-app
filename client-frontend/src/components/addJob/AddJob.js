@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function AddJob({ userData, setJobsData }) {
   const navigate = useNavigate();
-  const [jobDetails, setJobDetails] = useState({
+  
+  const [jobFormDetails, setJobFormDetails] = useState({
     companyName: "",
     logoUrl: "",
     jobPosition: "",
@@ -27,7 +28,7 @@ export default function AddJob({ userData, setJobsData }) {
       name === "skillsRequired"
         ? value.split(",").map((skill) => skill.trim())
         : value;
-    setJobDetails((prevData) => {
+    setJobFormDetails((prevData) => {
       return {
         ...prevData,
         [name]: skillsArray,
@@ -83,7 +84,7 @@ export default function AddJob({ userData, setJobsData }) {
                 placeholder="Enter your company name here"
                 className={styles.addJob_input}
                 name="companyName"
-                value={jobDetails.companyName}
+                value={jobFormDetails.companyName}
                 onChange={handleChange}
               ></input>
             </div>
@@ -95,7 +96,7 @@ export default function AddJob({ userData, setJobsData }) {
                 placeholder="Enter the link"
                 className={styles.addJob_input}
                 name="logoUrl"
-                value={jobDetails.logoUrl}
+                value={jobFormDetails.logoUrl}
                 onChange={handleChange}
               ></input>
             </div>
@@ -107,7 +108,7 @@ export default function AddJob({ userData, setJobsData }) {
                 placeholder="Enter job position"
                 className={styles.addJob_input}
                 name="jobPosition"
-                value={jobDetails.jobPosition}
+                value={jobFormDetails.jobPosition}
                 onChange={handleChange}
               ></input>
             </div>
@@ -119,7 +120,7 @@ export default function AddJob({ userData, setJobsData }) {
                 placeholder="Enter Amount in rupees"
                 className={styles.addJob_input}
                 name="monthlySalary"
-                value={jobDetails.monthlySalary}
+                value={jobFormDetails.monthlySalary}
                 onChange={handleChange}
               ></input>
             </div>
@@ -128,7 +129,7 @@ export default function AddJob({ userData, setJobsData }) {
               <label>Job Type</label>
               <div className={styles.select_wrapper}>
                 <select
-                  value={jobDetails.jobType}
+                  value={jobFormDetails.jobType}
                   onChange={handleChange}
                   name="jobType"
                 >
@@ -143,7 +144,7 @@ export default function AddJob({ userData, setJobsData }) {
               <label>Remote/office</label>
               <div className={styles.select_wrapper}>
                 <select
-                  value={jobDetails.remote}
+                  value={jobFormDetails.remote}
                   onChange={handleChange}
                   name="remote"
                 >
@@ -160,7 +161,7 @@ export default function AddJob({ userData, setJobsData }) {
                 placeholder="Enter Location"
                 className={styles.addJob_input}
                 name="location"
-                value={jobDetails.location}
+                value={jobFormDetails.location}
                 onChange={handleChange}
               ></input>
             </div>
@@ -170,7 +171,7 @@ export default function AddJob({ userData, setJobsData }) {
               <textarea
                 placeholder="Type the job description"
                 name="jobDescription"
-                value={jobDetails.jobDescription}
+                value={jobFormDetails.jobDescription}
                 onChange={handleChange}
               ></textarea>
             </div>
@@ -180,7 +181,7 @@ export default function AddJob({ userData, setJobsData }) {
               <textarea
                 placeholder="Type about your company"
                 name="aboutCompany"
-                value={jobDetails.aboutCompany}
+                value={jobFormDetails.aboutCompany}
                 onChange={handleChange}
               ></textarea>
             </div>
@@ -192,7 +193,7 @@ export default function AddJob({ userData, setJobsData }) {
                 placeholder="Enter the must have skills"
                 className={styles.addJob_input}
                 name="skillsRequired"
-                value={jobDetails.skillsRequired}
+                value={jobFormDetails.skillsRequired}
                 onChange={handleChange}
               ></input>
             </div>
@@ -204,7 +205,7 @@ export default function AddJob({ userData, setJobsData }) {
                 placeholder="Enter the additional information"
                 className={styles.addJob_input}
                 name="information"
-                value={jobDetails.information}
+                value={jobFormDetails.information}
                 onChange={handleChange}
               ></input>
             </div>
@@ -215,17 +216,17 @@ export default function AddJob({ userData, setJobsData }) {
               className={styles.addJob_btn}
               onClick={() =>
                 handleOnJobSubmit(
-                  jobDetails.companyName,
-                  jobDetails.logoUrl,
-                  jobDetails.jobPosition,
-                  jobDetails.monthlySalary,
-                  jobDetails.jobType,
-                  jobDetails.remote,
-                  jobDetails.location,
-                  jobDetails.jobDescription,
-                  jobDetails.aboutCompany,
-                  jobDetails.skillsRequired,
-                  jobDetails.information
+                  jobFormDetails.companyName,
+                  jobFormDetails.logoUrl,
+                  jobFormDetails.jobPosition,
+                  jobFormDetails.monthlySalary,
+                  jobFormDetails.jobType,
+                  jobFormDetails.remote,
+                  jobFormDetails.location,
+                  jobFormDetails.jobDescription,
+                  jobFormDetails.aboutCompany,
+                  jobFormDetails.skillsRequired,
+                  jobFormDetails.information
                 )
               }
             >

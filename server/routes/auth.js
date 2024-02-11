@@ -31,17 +31,21 @@ router.post("/register", async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await User.create({
+    const user = await User.create({
       name,
       email,
       mobile,
       password: hashedPassword,
+    });
+    const jwToken = jwt.sign(user.toJSON(), process.env.JWT_SCRETEKEY, {
+      expiresIn: 45000,
     });
     res.json({
       status: "SUCCESS",
       message: "You have registered in sucessfully !!",
       user: email,
       recruiterName: name,
+      jwToken
     });
   } catch (error) {
     errorHandler(res, error);

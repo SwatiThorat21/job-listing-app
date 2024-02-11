@@ -9,11 +9,11 @@ const isLoggedIn = (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    res.status(401).json({
-      status: "FAILED",
-      message: "You have not logged in! Please login",
-    });
-    console.log(error.message)
+    if (error instanceof jwt.TokenExpiredError) {
+      return res.status(401).json({ error: "Token expired" });
+    } else {
+      return res.status(401).json({ error: "Invalid token" });
+    }
   }
 };
 

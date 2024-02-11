@@ -15,13 +15,6 @@ function App() {
   const [jobDetails, setJobDetails] = useState({});
 
   useEffect(() => {
-    const storedUserData = localStorage.getItem("userData");
-    if (storedUserData) {
-      setUserData(JSON.parse(storedUserData));
-    }
-  }, []);
-
-  useEffect(() => {
     setIsLoggedIn(!!userData);
   }, [userData]);
 
@@ -36,42 +29,31 @@ function App() {
     };
     fetchData();
   }, []);
-
-  useEffect(() => {
-    const storedJobDetails = localStorage.getItem("jobDetails");
-    if (storedJobDetails) {
-      setJobDetails(JSON.parse(storedJobDetails));
-    }
-  }, []);
+  console.log(userData);
 
   return (
     <>
       <Router>
         <Routes>
-          {userData && userData.jwToken ? (
-            <Route
-              path="/"
-              element={
-                <Home
-                  userData={userData}
-                  isLoggedIn={isLoggedIn}
-                  setIsLoggedIn={setIsLoggedIn}
-                  jobsData={jobsData}
-                  setJobDetails={setJobDetails}
-                  jobDetails={jobDetails}
-                />
-              }
-            ></Route>
-          ) : (
-            <Route
-              path="/login"
-              element={
-                <Login
-                  setIsLoggedIn={setIsLoggedIn}
-                  setUserData={setUserData}
-                />
-              }
-            ></Route>
+          <Route
+            path="/"
+            element={
+              <Home
+                userData={userData}
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+                jobsData={jobsData}
+                setJobDetails={setJobDetails}
+                jobDetails={jobDetails}
+              />
+            }
+          ></Route>
+          <Route
+            path="/login"
+            element={
+              <Login setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />
+            }
+          ></Route>
           )}
           <Route
             path="/register"
@@ -90,6 +72,7 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
                 jobDetails={jobDetails}
+                setJobDetails={setJobDetails}
               />
             }
           ></Route>

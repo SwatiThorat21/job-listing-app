@@ -3,7 +3,7 @@ const router = express.Router();
 const JobPost = require("../models/jobs");
 const isLoggedIn = require("../middlewares/isLoggedIn");
 
-router.post("/job-post", isLoggedIn, async (req, res) => {
+router.post("/create-job-post", isLoggedIn, async (req, res) => {
   try {
     const {
       companyName,
@@ -42,7 +42,6 @@ router.post("/job-post", isLoggedIn, async (req, res) => {
       message: "You have sucessfully created Job!",
       data: req.body,
     });
- 
   } catch (error) {
     res.status(500).json({
       status: "FAILED",
@@ -51,7 +50,19 @@ router.post("/job-post", isLoggedIn, async (req, res) => {
   }
 });
 
-router.patch("/job-post/:id", async (req, res) => {
+router.get("/job-posts", async (req, res) => {
+  try {
+    const jobs = await JobPost.find().sort({ createdAt: -1 });
+    res.json({ jobs });
+  } catch (error) {
+    res.json({
+      status: "FAILED",
+      message: error.message,
+    });
+  }
+});
+
+router.patch("/job-post/:id", isLoggedIn, async (req, res) => {
   try {
     const { id } = req.params;
     const {
@@ -93,7 +104,7 @@ router.patch("/job-post/:id", async (req, res) => {
   }
 });
 
-router.get("/job-post", async (req, res) => {
+router.get("/job-post", isLoggedIn, async (req, res) => {
   const { jobPosition, skillsRequired } = req.query;
   try {
     let query = {};
@@ -113,23 +124,10 @@ router.get("/job-post", async (req, res) => {
   }
 });
 
-router.get("/job-posts", async (req, res) => {
-  try {
-    const jobs = await JobPost.find().sort({ createdAt: -1 });
-    res.json({ jobs });
-  } catch (error) {
-    res.json({
-      status: "FAILED",
-      message: error.message,
-    });
-  }
-});
-
-router.get("/job-post/:id", async (req, res) => {
+router.get("/job-post/:id", isLoggedIn, async (req, res) => {
   try {
     const { id } = req.params;
     const job = await JobPost.findById(id);
-    console.log(job);
 
     if (!job) {
       return res.status(404).json({
@@ -137,7 +135,7 @@ router.get("/job-post/:id", async (req, res) => {
         message: "Job not found",
       });
     }
-    res.json({ job });
+    res.status(200).json({ data: job });
   } catch (error) {
     res.status(500).json({
       status: "FAILED",

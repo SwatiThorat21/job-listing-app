@@ -8,6 +8,7 @@ export default function JobDescriptionPage({
   setIsLoggedIn,
   jobsData,
   jobDetails,
+  setJobDetails
 }) {
   return (
     <>
@@ -17,7 +18,7 @@ export default function JobDescriptionPage({
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
         />
-        <JobDescription jobsData={jobsData} jobDetails={jobDetails} />
+        <JobDescription jobsData={jobsData} jobDetails={jobDetails} userData={userData} setJobDetails={setJobDetails}/>
       </div>
     </>
   );

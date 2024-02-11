@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const authRoutes = require("./routes/auth");
-const jobRoutes = require("./routes/job");
+const jobRoutes = require("./routes/jobRoutes");
 const cors = require("cors");
 
 dotenv.config();
@@ -13,7 +13,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const databaseName = "jobportal";
+const databaseName = "joblist";
 
 mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,

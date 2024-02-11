@@ -19,7 +19,7 @@ export async function createJob(
 ) {
   if (userData === undefined) return;
   try {
-    const reqUrl = `${backendBaseUrl}/job/job-post`;
+    const reqUrl = `${backendBaseUrl}/job/create-job-post`;
     const reqPayload = {
       companyName: companyName,
       logoUrl: logoUrl,
@@ -79,8 +79,30 @@ export async function getJobDataById(id, jwToken, setJobDetails) {
     return await axios
       .get(reqUrl, reqPayload, { headers })
       .then((response) => {
-        localStorage.setItem("jobDetails", JSON.stringify(response.data.job));
+  
         setJobDetails(response.data.job);
+      })
+      .catch((error) => console.log(error));
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+}
+
+export async function editJobDataById(id, jwToken, setJobDetails) {
+  if (!jwToken) return;
+  try {
+    const reqUrl = `${backendBaseUrl}/job/job-post/${id}`;
+    const reqPayload = {
+      id: id,
+    };
+    const headers = {
+      jwtoken: `${jwToken}`,
+    };
+    return await axios
+      .patch(reqUrl, reqPayload, { headers })
+      .then((response) => {
+        setJobDetails(response.data)
       })
       .catch((error) => console.log(error));
   } catch (error) {

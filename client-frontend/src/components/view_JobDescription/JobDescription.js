@@ -1,16 +1,28 @@
+import { useNavigate } from "react-router-dom";
 import google from "../../images/Google.png";
 import stipend from "../../images/money-fill.png";
 import calender from "../../images/calender.png";
 import styles from "./JobDescription.module.css";
+import { editJobDataById } from "../../apis/jobs";
 
-export default function JobDescription({ jobDetails }) {
+export default function JobDescription({
+  jobDetails,
+  userData,
+  setJobDetails,
+}) {
+  const navigate = useNavigate();
   if (!jobDetails) return;
+
+  function editJobDetails() {
+    const { _id: id } = jobDetails;
+    editJobDataById(id, userData.jwToken, setJobDetails);
+    navigate("/add-job", { state: { jobDetails } });
+  }
   return (
     <>
       <div className={styles.jd_containder}>
         <div className={styles.jd_heading_wrapper}>
           <p>
-            {" "}
             {jobDetails.jobPosition} {jobDetails.remote} job/
             {jobDetails.jobType}
           </p>
@@ -20,7 +32,7 @@ export default function JobDescription({ jobDetails }) {
           <div className={styles.top_details}>
             <p>1w ago</p>
             <p>.</p>
-            <p>{jobDetails.jobType}e</p>
+            <p>{jobDetails.jobType}</p>
             <img src={google} alt={styles.google}></img>
             <p>Google</p>
           </div>
@@ -29,7 +41,9 @@ export default function JobDescription({ jobDetails }) {
               <div className={styles.job_title}>{jobDetails.jobPosition}</div>
               <p>{jobDetails.location} | India</p>
             </div>
-            <button className={styles.edit_btn}>Edit job</button>
+            <button className={styles.edit_btn} onClick={editJobDetails}>
+              Edit job
+            </button>
           </div>
           <div className={styles.stipend_duration_wrapper}>
             <div>

@@ -43,6 +43,8 @@ function App() {
     fetchData();
   }, []);
 
+  console.log(jobsData)
+
   return (
     <>
       <Router>

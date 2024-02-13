@@ -14,8 +14,8 @@ export default function Card({
   if (!jobsData) return;
 
   function viewJobDetails(index) {
-    navigate(`/view-job/${jobsData.jobs[index]._id}`);
-    getJobDataById(jobsData.jobs[index]._id, setJobDetails);
+    navigate(`/view-job/${jobsData[index]._id}`);
+    getJobDataById(jobsData[index]._id, setJobDetails);
   }
 
   return (

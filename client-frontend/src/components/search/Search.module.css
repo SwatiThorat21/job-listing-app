@@ -79,6 +79,8 @@ input::placeholder {
   letter-spacing: 0.6px;
   cursor: pointer;
 }
-.skills_wrapper{
+.skills_wrapper {
   display: flex;
+  flex-wrap: wrap;
+  row-gap: 15px;
 }

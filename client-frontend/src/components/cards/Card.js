@@ -7,28 +7,24 @@ import { getJobDataById } from "../../apis/jobs";
 
 export default function Card({
   isLoggedIn,
-  setIsLoggedIn,
   jobsData,
-  userData,
   setJobDetails,
-  jobDetails,
 }) {
   const navigate = useNavigate();
   if (!jobsData) return;
 
   function viewJobDetails(index) {
-    navigate(`/view-job/${jobDetails._id}`);
-    setIsLoggedIn(true);
-    getJobDataById(jobsData.jobs[index]._id, userData.jwToken, setJobDetails);
+    navigate(`/view-job/${jobsData.jobs[index]._id}`);
+    getJobDataById(jobsData.jobs[index]._id, setJobDetails);
   }
 
   return (
     <>
-      {jobsData.jobs &&
-        jobsData.jobs.map((jobData, index) => {
+      {jobsData &&
+        jobsData.map((jobData, index) => {
           return (
             <div
-              className={jobsData ? styles.jobCard_container : ""}
+              className={jobData ? styles.jobCard_container : ""}
               key={index}
             >
               <div className={styles.job_card}>

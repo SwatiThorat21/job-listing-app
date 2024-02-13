@@ -8,14 +8,13 @@ import { editJobDataById } from "../../apis/jobs";
 export default function JobDescription({
   jobDetails,
   userData,
-  setJobDetails,
 }) {
   const navigate = useNavigate();
   if (!jobDetails) return;
 
   function editJobDetails() {
     const { _id: id } = jobDetails;
-    editJobDataById(id, userData.jwToken, setJobDetails);
+    editJobDataById(id, userData.jwToken);
     navigate("/add-job", { state: { jobDetails } });
   }
   return (

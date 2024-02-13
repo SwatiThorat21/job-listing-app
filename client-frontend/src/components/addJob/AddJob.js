@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function AddJob({ userData, setJobsData }) {
   const navigate = useNavigate();
-  
+
   const [jobFormDetails, setJobFormDetails] = useState({
     companyName: "",
     logoUrl: "",
@@ -19,6 +19,20 @@ export default function AddJob({ userData, setJobsData }) {
     aboutCompany: "",
     skillsRequired: "",
     information: "",
+  });
+
+  const [errors, setErrors] = useState({
+    companyNameErr: false,
+    logoUrlErr: false,
+    jobPositionErr: false,
+    monthlySalaryErr: false,
+    jobTypeErr: false,
+    remoteErr: false,
+    locationErr: false,
+    jobDescriptionErr: false,
+    aboutCompanyErr: false,
+    skillsRequiredErr: false,
+    informationErr: false,
   });
 
   function handleChange(e) {
@@ -49,23 +63,62 @@ export default function AddJob({ userData, setJobsData }) {
     skillsRequired,
     information
   ) {
+    const newErrors = {};
+    if (!companyName) {
+      newErrors.companyNameErr = true;
+    }
+    if (!logoUrl) {
+      newErrors.logoUrlErr = true;
+    }
+    if (!jobPosition) {
+      newErrors.jobPositionErr = true;
+    }
+
+    if (!monthlySalary) {
+      newErrors.monthlySalaryErr = true;
+    }
+    if (!jobType) {
+      newErrors.jobTypeErr = true;
+    }
+    if (!remote) {
+      newErrors.remoteErr = true;
+    }
+    if (!location) {
+      newErrors.locationErr = true;
+    }
+    if (!jobDescription) {
+      newErrors.jobDescriptionErr = true;
+    }
+    if (!aboutCompany) {
+      newErrors.aboutCompanyErr = true;
+    }
+    if (!skillsRequired) {
+      newErrors.skillsRequiredErr = true;
+    }
+    if (!information) {
+      newErrors.informationErr = true;
+    }
+    setErrors(newErrors);
+
     try {
-      await createJob(
-        companyName,
-        logoUrl,
-        jobPosition,
-        monthlySalary,
-        jobType,
-        remote,
-        location,
-        jobDescription,
-        aboutCompany,
-        skillsRequired,
-        information,
-        userData,
-        setJobsData
-      );
-      navigate("/");
+      if (Object.keys(newErrors).length === 0) {
+        await createJob(
+          companyName,
+          logoUrl,
+          jobPosition,
+          monthlySalary,
+          jobType,
+          remote,
+          location,
+          jobDescription,
+          aboutCompany,
+          skillsRequired,
+          information,
+          userData,
+          setJobsData
+        );
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -79,50 +132,98 @@ export default function AddJob({ userData, setJobsData }) {
           <div className={styles.input_form_wrapper}>
             <div className={styles.input_wrapper}>
               <label>Company name</label>
-              <input
-                type="text"
-                placeholder="Enter your company name here"
-                className={styles.addJob_input}
-                name="companyName"
-                value={jobFormDetails.companyName}
-                onChange={handleChange}
-              ></input>
+              {!errors.companyNameErr && (
+                <input
+                  type="text"
+                  placeholder="Enter your company name here"
+                  className={styles.addJob_input}
+                  name="companyName"
+                  value={jobFormDetails.companyName}
+                  onChange={handleChange}
+                ></input>
+              )}
+              {errors.companyNameErr && (
+                <input
+                  type="text"
+                  className={styles.errorInput}
+                  name="companyName"
+                  value={jobFormDetails.companyName}
+                  onChange={handleChange}
+                  placeholder="Please enter your company name"
+                ></input>
+              )}
             </div>
 
             <div className={styles.input_wrapper}>
               <label>Add logo URL</label>
-              <input
-                type="text"
-                placeholder="Enter the link"
-                className={styles.addJob_input}
-                name="logoUrl"
-                value={jobFormDetails.logoUrl}
-                onChange={handleChange}
-              ></input>
+              {!errors.logoUrlErr && (
+                <input
+                  type="text"
+                  placeholder="Enter the link"
+                  className={styles.addJob_input}
+                  name="logoUrl"
+                  value={jobFormDetails.logoUrl}
+                  onChange={handleChange}
+                ></input>
+              )}
+              {errors.logoUrlErr && (
+                <input
+                  type="text"
+                  placeholder="Please enter logo url"
+                  className={styles.errorInput}
+                  name="logoUrl"
+                  value={jobFormDetails.logoUrl}
+                  onChange={handleChange}
+                ></input>
+              )}
             </div>
 
             <div className={styles.input_wrapper}>
               <label>Job position</label>
-              <input
-                type="text"
-                placeholder="Enter job position"
-                className={styles.addJob_input}
-                name="jobPosition"
-                value={jobFormDetails.jobPosition}
-                onChange={handleChange}
-              ></input>
+              {!errors.jobPositionErr && (
+                <input
+                  type="text"
+                  placeholder="Enter job position"
+                  className={styles.addJob_input}
+                  name="jobPosition"
+                  value={jobFormDetails.jobPosition}
+                  onChange={handleChange}
+                ></input>
+              )}
+              {errors.jobPositionErr && (
+                <input
+                  type="text"
+                  placeholder="Please enter job position"
+                  className={styles.errorInput}
+                  name="jobPosition"
+                  value={jobFormDetails.jobPosition}
+                  onChange={handleChange}
+                ></input>
+              )}
             </div>
 
             <div className={styles.input_wrapper}>
               <label>Monthly Salary</label>
-              <input
-                type="text"
-                placeholder="Enter Amount in rupees"
-                className={styles.addJob_input}
-                name="monthlySalary"
-                value={jobFormDetails.monthlySalary}
-                onChange={handleChange}
-              ></input>
+              {!errors.monthlySalaryErr && (
+                <input
+                  type="text"
+                  placeholder="Enter Amount in rupees"
+                  className={styles.addJob_input}
+                  name="monthlySalary"
+                  value={jobFormDetails.monthlySalary}
+                  onChange={handleChange}
+                ></input>
+              )}
+              {errors.monthlySalaryErr && (
+                <input
+                  type="text"
+                  placeholder="Please enter amount"
+                  className={styles.errorInput}
+                  name="monthlySalary"
+                  value={jobFormDetails.monthlySalary}
+                  onChange={handleChange}
+                ></input>
+              )}
             </div>
 
             <div className={styles.input_wrapper}>
@@ -137,6 +238,9 @@ export default function AddJob({ userData, setJobsData }) {
                   <option value="Part-time">Part-time</option>
                   <option value="Internship">Internship</option>
                 </select>
+                {errors.jobTypeErr && (
+                  <div style={{ color: "red", fontSize:"13px" }}>Please select job type</div>
+                )}
               </div>
             </div>
 
@@ -151,63 +255,124 @@ export default function AddJob({ userData, setJobsData }) {
                   <option value="Remote">Remote</option>
                   <option value="Office">Office</option>
                 </select>
+                {errors.remoteErr && (
+                  <div style={{ color: "red", fontSize:"13px" }}>Please select remote or office work</div>
+                )}
               </div>
             </div>
 
             <div className={styles.input_wrapper}>
               <label>Location</label>
-              <input
-                type="text"
-                placeholder="Enter Location"
-                className={styles.addJob_input}
-                name="location"
-                value={jobFormDetails.location}
-                onChange={handleChange}
-              ></input>
+              {!errors.locationErr && (
+                <input
+                  type="text"
+                  placeholder="Enter Location"
+                  className={styles.addJob_input}
+                  name="location"
+                  value={jobFormDetails.location}
+                  onChange={handleChange}
+                ></input>
+              )}
+              {errors.locationErr && (
+                <input
+                  type="text"
+                  placeholder="Please enter location"
+                  className={styles.errorInput}
+                  name="location"
+                  value={jobFormDetails.location}
+                  onChange={handleChange}
+                ></input>
+              )}
             </div>
 
             <div className={styles.input_wrapper}>
               <label>Job Description</label>
-              <textarea
-                placeholder="Type the job description"
-                name="jobDescription"
-                value={jobFormDetails.jobDescription}
-                onChange={handleChange}
-              ></textarea>
+              {!errors.jobDescriptionErr && (
+                <textarea
+                  placeholder="Type the job description"
+                  name="jobDescription"
+                  value={jobFormDetails.jobDescription}
+                  onChange={handleChange}
+                ></textarea>
+              )}
+              {errors.jobDescriptionErr && (
+                <textarea
+                  placeholder="Please type the job description"
+                  name="jobDescription"
+                  value={jobFormDetails.jobDescription}
+                  onChange={handleChange}
+                  className={styles.errorInput}
+                ></textarea>
+              )}
             </div>
 
             <div className={styles.input_wrapper}>
               <label>About Company</label>
-              <textarea
-                placeholder="Type about your company"
-                name="aboutCompany"
-                value={jobFormDetails.aboutCompany}
-                onChange={handleChange}
-              ></textarea>
+              {!errors.aboutCompanyErr && (
+                <textarea
+                  placeholder="Type about your company"
+                  name="aboutCompany"
+                  value={jobFormDetails.aboutCompany}
+                  onChange={handleChange}
+                ></textarea>
+              )}
+              {errors.aboutCompanyErr && (
+                <textarea
+                  placeholder="Please type about your company"
+                  name="aboutCompany"
+                  value={jobFormDetails.aboutCompany}
+                  onChange={handleChange}
+                  className={styles.errorInput}
+                ></textarea>
+              )}
             </div>
 
             <div className={styles.input_wrapper}>
               <label>Skills Required</label>
-              <input
-                type="text"
-                placeholder="Enter the must have skills"
-                className={styles.addJob_input}
-                name="skillsRequired"
-                value={jobFormDetails.skillsRequired}
-                onChange={handleChange}
-              ></input>
+              {!errors.skillsRequiredErr && (
+                <input
+                  type="text"
+                  placeholder="Enter the must have skills"
+                  className={styles.addJob_input}
+                  name="skillsRequired"
+                  value={jobFormDetails.skillsRequired}
+                  onChange={handleChange}
+                ></input>
+              )}
+              {errors.skillsRequiredErr && (
+                <input
+                  type="text"
+                  placeholder="Enter the skills"
+                  className={styles.errorInput}
+                  name="skillsRequired"
+                  value={jobFormDetails.skillsRequired}
+                  onChange={handleChange}
+                ></input>
+              )}
             </div>
 
             <div className={styles.input_wrapper}>
               <label>Information</label>
-              <input
-                type="text"
-                placeholder="Enter the additional information"
-                className={styles.addJob_input}
-                name="information"
-                value={jobFormDetails.information}
-                onChange={handleChange}
-              ></input>
+              {!errors.informationErr && (
+                <input
+                  type="text"
+                  placeholder="Enter the additional information"
+                  className={styles.addJob_input}
+                  name="information"
+                  value={jobFormDetails.information}
+                  onChange={handleChange}
+                ></input>
+              )}
+              {errors.informationErr && (
+                <input
+                  type="text"
+                  placeholder="Please enter the information"
+                  className={styles.errorInput}
+                  name="information"
+                  value={jobFormDetails.information}
+                  onChange={handleChange}
+                ></input>
+              )}
             </div>
           </div>
           <div className={styles.btn_wrapper}>

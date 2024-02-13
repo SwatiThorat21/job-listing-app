@@ -9,7 +9,6 @@ export default function Home({
   setIsLoggedIn,
   jobsData,
   setJobDetails,
-  jobDetails,
 }) {
   return (
     <>
@@ -18,22 +17,22 @@ export default function Home({
           userData={userData}
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
-          jobsData={jobsData}
         />
-        <div className="mainPage_container">
-          <Search isLoggedIn={isLoggedIn} />
 
-          <div className="cards_container">
-            <Card
-              isLoggedIn={isLoggedIn}
-              setIsLoggedIn={setIsLoggedIn}
-              jobsData={jobsData}
-              userData={userData}
-              setJobDetails={setJobDetails}
-              jobDetails={jobDetails}
-            />
+        {jobsData.length === 0 ? (
+          <div className="noJobs_content">No Jobs are added.</div>
+        ) : (
+          <div className="mainPage_container">
+            <Search isLoggedIn={isLoggedIn} />
+            <div className="cards_container">
+              <Card
+                isLoggedIn={isLoggedIn}
+                jobsData={jobsData}
+                setJobDetails={setJobDetails}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

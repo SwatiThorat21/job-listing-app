@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Register.module.css";
 import { register } from "../../apis/auth";
 
-export default function Register({ setIsLoggedIn, setUserData }) {
+export default function Register({ setUserData, setIsLoggedIn }) {
   const navigate = useNavigate();
   const [registerData, setRegisterData] = useState({
     name: "",

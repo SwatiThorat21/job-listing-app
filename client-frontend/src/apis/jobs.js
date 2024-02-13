@@ -17,7 +17,7 @@ export async function createJob(
   userData,
   setJobsData
 ) {
-  if (userData === undefined) return;
+  if (!userData || !setJobsData ) return;
   try {
     const reqUrl = `${backendBaseUrl}/job/create-job-post`;
     const reqPayload = {
@@ -66,21 +66,13 @@ export async function getAllJobs() {
   }
 }
 
-export async function getJobDataById(id, jwToken, setJobDetails) {
-  if (!jwToken) return;
+export async function getJobDataById(id) {
   try {
     const reqUrl = `${backendBaseUrl}/job/job-post/${id}`;
-    const reqPayload = {
-      id: id,
-    };
-    const headers = {
-      jwtoken: `${jwToken}`,
-    };
     return await axios
-      .get(reqUrl, reqPayload, { headers })
+      .get(reqUrl)
       .then((response) => {
-  
-        setJobDetails(response.data.job);
+        return response.data.data;
       })
       .catch((error) => console.log(error));
   } catch (error) {
@@ -102,7 +94,7 @@ export async function editJobDataById(id, jwToken, setJobDetails) {
     return await axios
       .patch(reqUrl, reqPayload, { headers })
       .then((response) => {
-        setJobDetails(response.data)
+        setJobDetails(response.data);
       })
       .catch((error) => console.log(error));
   } catch (error) {

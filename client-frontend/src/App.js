@@ -15,21 +15,33 @@ function App() {
   const [jobDetails, setJobDetails] = useState({});
 
   useEffect(() => {
-    setIsLoggedIn(!!userData);
-  }, [userData]);
+    const token = localStorage.getItem("jwToken");
+    if (token) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const storedUserData = localStorage.getItem("userData");
+    if (storedUserData) {
+      setUserData(JSON.parse(storedUserData));
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const jobs = await getAllJobs();
-        setJobsData(jobs);
+        setJobsData(jobs.jobs);
       } catch (error) {
         console.error(error.message);
       }
     };
     fetchData();
   }, []);
-  console.log(userData);
 
   return (
     <>
@@ -51,16 +63,15 @@ function App() {
           <Route
             path="/login"
             element={
-              <Login setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />
+              <Login setUserData={setUserData} setIsLoggedIn={setIsLoggedIn} />
             }
           ></Route>
-          )}
           <Route
             path="/register"
             element={
               <Registration
-                setIsLoggedIn={setIsLoggedIn}
                 setUserData={setUserData}
+                setIsLoggedIn={setIsLoggedIn}
               />
             }
           ></Route>
@@ -73,6 +84,7 @@ function App() {
                 setIsLoggedIn={setIsLoggedIn}
                 jobDetails={jobDetails}
                 setJobDetails={setJobDetails}
+                setUserData={setUserData}
               />
             }
           ></Route>

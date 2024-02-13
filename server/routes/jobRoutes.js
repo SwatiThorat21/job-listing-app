@@ -104,7 +104,7 @@ router.patch("/job-post/:id", isLoggedIn, async (req, res) => {
   }
 });
 
-router.get("/job-post", isLoggedIn, async (req, res) => {
+router.get("/job-post", async (req, res) => {
   const { jobPosition, skillsRequired } = req.query;
   try {
     let query = {};
@@ -124,7 +124,7 @@ router.get("/job-post", isLoggedIn, async (req, res) => {
   }
 });
 
-router.get("/job-post/:id", isLoggedIn, async (req, res) => {
+router.get("/job-post/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const job = await JobPost.findById(id);

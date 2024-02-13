@@ -11,8 +11,10 @@ export async function login(email, password, setUserData) {
   return await axios
     .post(reqUrl, reqPayload)
     .then((response) => {
-     
+      localStorage.setItem("jwToken", response.data.jwToken);
+      localStorage.setItem("userData", JSON.stringify(response.data));
       setUserData(response.data);
+      console.log(response.data)
       return response.data;
     })
     .catch((error) => {
@@ -34,8 +36,10 @@ export async function register(name, email, mobile, password, setUserData) {
       .post(reqUrl, reqPayload)
       .then((response) => {
         console.log(response.data);
-    
+        localStorage.setItem("jwToken", response.data.jwToken);
+        localStorage.setItem("userData", JSON.stringify(response.data));
         setUserData(response.data);
+        console.log(response.data)
         return response.data;
       })
       .catch((error) => {

@@ -2,29 +2,35 @@ import { useNavigate } from "react-router-dom";
 import leftRectangle from "../../images/home_left_rectangle.png";
 import rightRectangle from "../../images/home_right_rectangle.png";
 import topRectangle from "../../images/home_top_rectangle.png";
-import recruiter_logo from "../../images/recruiter_logo.png";
 import styles from "./Navbar.module.css";
 
 export default function Navbar({ userData, isLoggedIn, setIsLoggedIn }) {
   const navigate = useNavigate();
 
   function isLogOut() {
-    setIsLoggedIn(false);
+    localStorage.removeItem("jwToken");
+    localStorage.removeItem("userData");
     navigate("/login");
-   
+    setIsLoggedIn(false);
   }
-
+  console.log(userData);
   return (
     <>
       {isLoggedIn ? (
         <div className={styles.navbar}>
-          <h3 onClick={()=>navigate("/")}>Jobfinder</h3>
+          <h3 onClick={() => navigate("/")}>Jobfinder</h3>
           <div className={styles.login_btns_wrapper}>
             <p className={styles.logout_option} onClick={() => isLogOut()}>
               Logout
             </p>
-            <p className={styles.recruiter_name}>Hello! {userData?.recruiterName}</p>
-            <img src={recruiter_logo} alt="recruiter_logo"></img>
+            <p className={styles.recruiter_name}>
+              Hello! {userData?.recruiterName}
+            </p>
+            <div className={styles.user_logo}>
+              {userData &&
+                userData.recruiterName &&
+                userData.recruiterName.charAt(0)}
+            </div>
           </div>
           <img
             src={leftRectangle}
@@ -44,9 +50,12 @@ export default function Navbar({ userData, isLoggedIn, setIsLoggedIn }) {
         </div>
       ) : (
         <div className={styles.navbar}>
-          <h3>Jobfinder</h3>
+          <h3 onClick={() => navigate("/")}>Jobfinder</h3>
           <div className={styles.login_btns_wrapper}>
-            <button className={styles.loginBtn} onClick={() => navigate("/login")}>
+            <button
+              className={styles.loginBtn}
+              onClick={() => navigate("/login")}
+            >
               Login
             </button>
             <button

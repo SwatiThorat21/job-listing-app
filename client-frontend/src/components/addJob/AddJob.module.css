@@ -68,6 +68,9 @@ select {
 .select_wrapper {
   width: 60%;
   padding: 0 2.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 textarea {
   width: 60%;
@@ -91,22 +94,32 @@ textarea::placeholder {
   justify-content: flex-end;
   gap: 1rem;
 }
-.cancel_btn{
+.cancel_btn {
   padding: 0.4rem 2rem;
   background-color: #ffffff;
-  border: 1.6px solid #CECECE;
-  color: #C2C2C2;
+  border: 1.6px solid #cecece;
+  color: #c2c2c2;
   border-radius: 3px;
   outline: none;
   cursor: pointer;
 }
-.addJob_btn{
+.addJob_btn {
   padding: 0.4rem 2rem;
-  background-color: #ED5353;
+  background-color: #ed5353;
   color: #ffffff;
   outline: none;
   border-radius: 3px;
   border: none;
   letter-spacing: 0.6px;
   cursor: pointer;
+}
+.errorInput {
+  border: 1.4px solid #d60000;
+  background: #f4f4f4;
+  padding: 0.3rem 1rem;
+  width: 60%;
+  border-radius: 4px;
+}
+.errorInput::placeholder {
+  color: #d60000;
 }

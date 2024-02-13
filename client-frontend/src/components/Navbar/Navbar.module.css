@@ -76,3 +76,10 @@
   font-size: 16px;
   cursor: pointer;
 }
+.user_logo {
+  padding: 0.7rem 1rem;
+  background-color: #fff;
+  border-radius: 50%;
+  color: #ed5353;
+  font-weight: 600;
+}

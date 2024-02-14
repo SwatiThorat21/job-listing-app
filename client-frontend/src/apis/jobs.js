@@ -51,12 +51,16 @@ export async function createJob(
   }
 }
 
-export async function getAllJobs() {
+export async function getAllJobs(skillsArray) {
   try {
-    const reqUrl = `${backendBaseUrl}/job/job-posts`;
+    let reqUrl = `${backendBaseUrl}/job/job-posts`;
+    if(skillsArray && skillsArray.length > 0){
+      reqUrl += `?skillsRequired=${skillsArray.join(',')}`
+    }
     return await axios
       .get(reqUrl)
       .then((response) => {
+        console.log(response.data);
         return response.data;
       })
       .catch((error) => console.log(error));

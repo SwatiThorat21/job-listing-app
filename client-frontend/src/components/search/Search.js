@@ -3,9 +3,10 @@ import closeIcon from "../../images/close_icon.png";
 import styles from "./Search.module.css";
 import { createJob } from "../../apis/jobs";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getAllJobs } from "../../apis/jobs";
 
-export default function Search({ isLoggedIn }) {
+export default function Search({ isLoggedIn, setJobsData }) {
   const navigate = useNavigate();
   const [selectedSkills, setSelectedSkills] = useState([]);
 
@@ -13,7 +14,7 @@ export default function Search({ isLoggedIn }) {
     const { value } = e.target;
     setSelectedSkills((prevSkills) => {
       if (!prevSkills.includes(value)) {
-        if (prevSkills.length < 6) {
+        if (prevSkills.length < 5) {
           return [...prevSkills, value];
         }
         return prevSkills;
@@ -21,7 +22,31 @@ export default function Search({ isLoggedIn }) {
         return prevSkills.filter((skill) => skill !== value);
       }
     });
+    localStorage.setItem(
+      "selectedSkills",
+      JSON.stringify([...selectedSkills, value])
+    );
   }
+
+  useEffect(() => {
+    const storedSkills = localStorage.getItem("selectedSkills");
+    if (storedSkills) {
+      setSelectedSkills(JSON.parse(storedSkills));
+    }
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const jobs = await getAllJobs(selectedSkills);
+        setJobsData(jobs.jobs);
+        console.log(jobs);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    fetchData();
+  }, [selectedSkills, setJobsData]);
 
   console.log(selectedSkills);
 
@@ -55,115 +80,95 @@ export default function Search({ isLoggedIn }) {
       navigate("add-job");
     } catch (error) {}
   }
+
+  function closeSkills(index) {
+    setSelectedSkills((prevSkills) => {
+      const updatedSkills = prevSkills.filter((_, i) => i !== index);
+      localStorage.setItem("selectedSkills", JSON.stringify(updatedSkills));
+      return updatedSkills;
+    });
+  }
+  function clearSkillsSelected() {
+    setSelectedSkills([]);
+    localStorage.removeItem("selectedSkills");
+  }
   return (
     <>
-      {isLoggedIn ? (
-        <div className={styles.search_container}>
-          <div className={styles.input_container}>
-            <img
-              src={searchbar}
-              alt="searchbar"
-              className={styles.searchbar}
-            ></img>
-            <input type="text" placeholder="Type any job title"></input>
-          </div>
-          <div className={styles.searchbySkills_clear_container}>
-            <div
-              className={styles.searchbySkills_wrapper}
-              value={selectedSkills}
-              onChange={handleChange}
-              name="jobType"
-            >
-              <select className={styles.select}>
-                <option value="React.js">React.js</option>
-                <option value="Angular">Angular</option>
-                <option value="Vue.js">Vue.js</option>
-                <option value="Express.js">Express.js</option>
-                <option value="Django">Django</option>
-                <option value="Flask">Flask</option>
-                <option value="Spring Boot">Spring Boot</option>
-                <option value="Ruby on Rails">Ruby on Rails</option>
-                <option value="Laravel">Laravel</option>
-                <option value="ASP.NET Core">ASP.NET Core</option>
-                <option value="HTML">HTML</option>
-                <option value="CSS">CSS</option>
-                <option value="Javascript">Javascript</option>
-                <option value="Python">Python</option>
-                <option value="Java">Java</option>
-                <option value="C##">C##</option>
-                <option value="C++">C++</option>
-                <option value="Ruby">Ruby</option>
-                <option value="Swift">Swift</option>
-                <option value="Cybersecurity">Cybersecurity</option>
-                <option value="Typescript">Typescript</option>
-                <option value="PHP">PHP</option>
-                <option value="Rust">Rust</option>
-                <option value="Dart">Dart</option>
-                <option value="RESTful APIs">RESTful APIs</option>
-                <option value="GraphQL">GraphQL</option>
-                <option value="HTML">HTML</option>
-                <option value="Git">Git</option>
-                <option value="Data Structures and Algorithms">
-                  Data Structures and Algorithms
-                </option>
-              </select>
-              <div className={styles.skills_wrapper}>
-                {selectedSkills.map((skill) => (
-                  <div className={styles.skill_withClose_div}>
-                    <div className={styles.skill_div}>{skill}</div>
-                    <img
-                      src={closeIcon}
-                      alt="closeIcon"
-                      className={styles.closeIcon}
-                    ></img>
-                  </div>
-                ))}
-              </div>
+      <div className={styles.search_container}>
+        <div className={styles.input_container}>
+          <img
+            src={searchbar}
+            alt="searchbar"
+            className={styles.searchbar}
+          ></img>
+          <input type="text" placeholder="Type any job title"></input>
+        </div>
+        <div className={styles.searchbySkills_clear_container}>
+          <div
+            className={styles.searchbySkills_wrapper}
+            value={selectedSkills}
+            onChange={handleChange}
+            name="jobType"
+          >
+            <select className={styles.select}>
+              <option value="ReactJs">ReactJs</option>
+              <option value="Angular">Angular</option>
+              <option value="Vue.js">Vue.js</option>
+              <option value="Express.js">Express.js</option>
+              <option value="Django">Django</option>
+              <option value="Flask">Flask</option>
+              <option value="Spring Boot">Spring Boot</option>
+              <option value="Ruby on Rails">Ruby on Rails</option>
+              <option value="Laravel">Laravel</option>
+              <option value="ASP.NET Core">ASP.NET Core</option>
+              <option value="HTML">HTML</option>
+              <option value="CSS">CSS</option>
+              <option value="Javascript">Javascript</option>
+              <option value="Python">Python</option>
+              <option value="Java">Java</option>
+              <option value="C##">C##</option>
+              <option value="C++">C++</option>
+              <option value="Ruby">Ruby</option>
+              <option value="Swift">Swift</option>
+              <option value="Cybersecurity">Cybersecurity</option>
+              <option value="Typescript">Typescript</option>
+              <option value="PHP">PHP</option>
+              <option value="Rust">Rust</option>
+              <option value="Dart">Dart</option>
+              <option value="RESTful APIs">RESTful APIs</option>
+              <option value="GraphQL">GraphQL</option>
+              <option value="HTML">HTML</option>
+              <option value="Git">Git</option>
+              <option value="Data Structures and Algorithms">
+                Data Structures and Algorithms
+              </option>
+            </select>
+            <div className={styles.skills_wrapper}>
+              {selectedSkills.map((skill, index) => (
+                <div className={styles.skill_withClose_div} key={index}>
+                  <div className={styles.skill_div}>{skill}</div>
+                  <img
+                    src={closeIcon}
+                    alt="closeIcon"
+                    className={styles.closeIcon}
+                    onClick={() => closeSkills(index)}
+                  ></img>
+                </div>
+              ))}
             </div>
+          </div>
+          {isLoggedIn ? (
             <button onClick={addJob} className={styles.addJob_btn}>
               +Add Job
             </button>
-          </div>
-          <p className={styles.clear_skills}>Clear</p>
+          ) : (
+            ""
+          )}
         </div>
-      ) : (
-        <div className={styles.search_container}>
-          <div className={styles.input_container}>
-            <img
-              src={searchbar}
-              alt="searchbar"
-              className={styles.searchbar}
-            ></img>
-            <input type="text" placeholder="Type any job title"></input>
-          </div>
-          <div className={styles.searchbySkills_clear_container}>
-            <div className={styles.searchbySkills_wrapper}>
-              <select className={styles.select}>
-                <option value={styles.skills}>Skills</option>
-              </select>
-              <div className={styles.skills_wrapper}>
-                <div className={styles.skill_withClose_div}>
-                  <div className={styles.skill_div}>Frontend</div>
-                  <img
-                    src={closeIcon}
-                    alt="closeIcon"
-                    className={styles.closeIcon}
-                  ></img>
-                </div>
-                <div className={styles.skill_withClose_div}>
-                  <div className={styles.skill_div}>CSS</div>
-                  <img
-                    src={closeIcon}
-                    alt="closeIcon"
-                    className={styles.closeIcon}
-                  ></img>
-                </div>
-              </div>
-            </div>
-            <p className={styles.clear_skills}>Clear</p>
-          </div>
-        </div>
-      )}
+        <p className={styles.clear_skills} onClick={clearSkillsSelected}>
+          Clear
+        </p>
+      </div>
     </>
   );
 }

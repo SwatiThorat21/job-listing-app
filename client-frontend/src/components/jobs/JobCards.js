@@ -1,7 +1,7 @@
 import peopleIcon from "../../images/people_logo.png";
 import rupeeIcon from "../../images/rupee_logo.png";
 import flag from "../../images/country_flag.png";
-import styles from "./Card.module.css";
+import styles from "./jobCards.module.css";
 import { useNavigate } from "react-router-dom";
 import { getJobDataById } from "../../apis/jobs";
 

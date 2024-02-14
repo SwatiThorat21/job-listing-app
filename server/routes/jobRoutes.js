@@ -50,18 +50,6 @@ router.post("/create-job-post", isLoggedIn, async (req, res) => {
   }
 });
 
-router.get("/job-posts", async (req, res) => {
-  try {
-    const jobs = await JobPost.find().sort({ createdAt: -1 });
-    res.json({ jobs });
-  } catch (error) {
-    res.json({
-      status: "FAILED",
-      message: error.message,
-    });
-  }
-});
-
 router.patch("/job-post/:id", isLoggedIn, async (req, res) => {
   try {
     const { id } = req.params;
@@ -104,7 +92,7 @@ router.patch("/job-post/:id", isLoggedIn, async (req, res) => {
   }
 });
 
-router.get("/job-post", async (req, res) => {
+router.get("/job-posts", async (req, res) => {
   const { jobPosition, skillsRequired } = req.query;
   try {
     let query = {};
@@ -112,8 +100,9 @@ router.get("/job-post", async (req, res) => {
       query.jobPosition = jobPosition;
     }
     if (skillsRequired) {
-      query.skillsRequired = { $in: skillsRequired.split("&") };
+      query.skillsRequired = { $in: skillsRequired.split(",")};
     }
+    console.log(skillsRequired)
     const jobs = await JobPost.find(query).sort({ createdAt: -1 });
     res.json({ jobs });
   } catch (error) {

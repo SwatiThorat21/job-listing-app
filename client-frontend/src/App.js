@@ -59,6 +59,7 @@ function App() {
                 jobsData={jobsData}
                 setJobDetails={setJobDetails}
                 jobDetails={jobDetails}
+                setJobsData={setJobsData}
               />
             }
           ></Route>

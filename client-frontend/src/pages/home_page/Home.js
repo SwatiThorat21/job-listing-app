@@ -1,7 +1,7 @@
 import "./home.css";
 import Navbar from "../../components/navbar/Navbar";
 import Search from "../../components/search/Search";
-import Card from "../../components/cards/Card";
+import Card from "../../components/jobs/JobCards";
 
 export default function Home({
   userData,
@@ -9,6 +9,7 @@ export default function Home({
   setIsLoggedIn,
   jobsData,
   setJobDetails,
+  setJobsData
 }) {
   return (
     <>
@@ -23,7 +24,7 @@ export default function Home({
           <div className="noJobs_content">No Jobs are added.</div>
         ) : (
           <div className="mainPage_container">
-            <Search isLoggedIn={isLoggedIn} />
+            <Search isLoggedIn={isLoggedIn} setJobsData={setJobsData}/>
             <div className="cards_container">
               <Card
                 isLoggedIn={isLoggedIn}

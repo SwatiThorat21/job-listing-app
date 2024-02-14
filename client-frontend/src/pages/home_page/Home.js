@@ -20,7 +20,7 @@ export default function Home({
           setIsLoggedIn={setIsLoggedIn}
         />
 
-        {jobsData.length === 0 ? (
+        {jobsData.length === 0  && !isLoggedIn ? (
           <div className="noJobs_content">No Jobs are added.</div>
         ) : (
           <div className="mainPage_container">

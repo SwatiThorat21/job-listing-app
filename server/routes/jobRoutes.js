@@ -102,7 +102,6 @@ router.get("/job-posts", async (req, res) => {
     if (skillsRequired) {
       query.skillsRequired = { $in: skillsRequired.split(",")};
     }
-    console.log(skillsRequired)
     const jobs = await JobPost.find(query).sort({ createdAt: -1 });
     res.json({ jobs });
   } catch (error) {

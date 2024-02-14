@@ -60,7 +60,6 @@ export async function getAllJobs(skillsArray) {
     return await axios
       .get(reqUrl)
       .then((response) => {
-        console.log(response.data);
         return response.data;
       })
       .catch((error) => console.log(error));

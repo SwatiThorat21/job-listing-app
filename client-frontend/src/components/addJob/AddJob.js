@@ -40,7 +40,7 @@ export default function AddJob({ userData, setJobsData }) {
 
     const skillsArray =
       name === "skillsRequired"
-        ? value.split(",").map((skill) => skill.trim())
+        ? value.split(",").map((skill) => skill.toLowerCase().trim())
         : value;
     setJobFormDetails((prevData) => {
       return {

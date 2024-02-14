@@ -12,19 +12,22 @@ export default function Search({ isLoggedIn, setJobsData }) {
 
   function handleChange(e) {
     const { value } = e.target;
+
+    const normalizedSkill = value.toLowerCase().trim();
+
     setSelectedSkills((prevSkills) => {
-      if (!prevSkills.includes(value)) {
+      if (!prevSkills.includes(normalizedSkill)) {
         if (prevSkills.length < 5) {
-          return [...prevSkills, value];
+          return [...prevSkills, normalizedSkill];
         }
         return prevSkills;
       } else {
-        return prevSkills.filter((skill) => skill !== value);
+        return prevSkills.filter((skill) => skill !== normalizedSkill);
       }
     });
     localStorage.setItem(
       "selectedSkills",
-      JSON.stringify([...selectedSkills, value])
+      JSON.stringify([...selectedSkills, normalizedSkill])
     );
   }
 
@@ -113,8 +116,8 @@ export default function Search({ isLoggedIn, setJobsData }) {
             <select className={styles.select}>
               <option value="ReactJs">ReactJs</option>
               <option value="Angular">Angular</option>
-              <option value="Vue.js">Vue.js</option>
-              <option value="Express.js">Express.js</option>
+              <option value="Vue.js">Vue</option>
+              <option value="Express.js">Express</option>
               <option value="Django">Django</option>
               <option value="Flask">Flask</option>
               <option value="Spring Boot">Spring Boot</option>

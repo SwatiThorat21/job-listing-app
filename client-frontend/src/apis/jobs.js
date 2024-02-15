@@ -57,15 +57,19 @@ export async function createJob(
   }
 }
 
-export async function getAllJobs(skillsArray) {
+export async function getAllJobs(skillsArray, jobType) {
   try {
     let reqUrl = `${backendBaseUrl}/job/job-posts`;
     if (skillsArray && skillsArray.length > 0) {
       reqUrl += `?skillsRequired=${skillsArray.join(",")}`;
     }
+    if (jobType) {
+      reqUrl += `?jobPosition=${jobType}`;
+    }
     return await axios
       .get(reqUrl)
       .then((response) => {
+        console.log(response.data);
         return response.data;
       })
       .catch((error) => console.log(error));
@@ -90,13 +94,39 @@ export async function getJobDataById(id) {
   }
 }
 
-export async function editJobDataById(id, jwToken, setJobDetails) {
+export async function editJobDataById(
+  companyName,
+  logoUrl,
+  jobPosition,
+  monthlySalary,
+  jobType,
+  remote,
+  location,
+  jobDescription,
+  aboutCompany,
+  skillsRequired,
+  information,
+  id,
+  jwToken,
+  setJobDetails
+) {
   if (!jwToken) return;
+  const reqPayload = {
+    companyName: companyName,
+    logoUrl: logoUrl,
+    jobPosition: jobPosition,
+    monthlySalary: monthlySalary,
+    jobType: jobType,
+    remote: remote,
+    location: location,
+    jobDescription: jobDescription,
+    aboutCompany: aboutCompany,
+    skillsRequired: skillsRequired,
+    information: information,
+  };
   try {
-    const reqUrl = `${backendBaseUrl}/job/job-post/${id}`;
-    const reqPayload = {
-      id: id,
-    };
+    const reqUrl = `${backendBaseUrl}/job/edit-job-post/${id}`;
+
     const headers = {
       jwtoken: `${jwToken}`,
     };

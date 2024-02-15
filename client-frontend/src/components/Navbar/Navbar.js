@@ -13,7 +13,6 @@ export default function Navbar({ userData, isLoggedIn, setIsLoggedIn }) {
     navigate("/login");
     setIsLoggedIn(false);
   }
-  console.log(userData);
   return (
     <>
       {isLoggedIn ? (

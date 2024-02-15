@@ -50,7 +50,7 @@ router.post("/create-job-post", isLoggedIn, async (req, res) => {
   }
 });
 
-router.patch("/job-post/:id", isLoggedIn, async (req, res) => {
+router.patch("/edit-job-post/:id", isLoggedIn, async (req, res) => {
   try {
     const { id } = req.params;
     const {
@@ -97,7 +97,7 @@ router.get("/job-posts", async (req, res) => {
   try {
     let query = {};
     if (jobPosition) {
-      query.jobPosition = jobPosition;
+      query.jobPosition = new RegExp(jobPosition, 'i');
     }
     if (skillsRequired) {
       query.skillsRequired = { $in: skillsRequired.split(",")};

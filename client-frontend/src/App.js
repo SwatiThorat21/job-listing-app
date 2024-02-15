@@ -5,7 +5,7 @@ import Registration from "./pages/registerPage/RegistrationPage.js";
 import Login from "./pages/login_page/LoginPage.js";
 import Home from "./pages/home_page/Home.js";
 import JobDescriptionPage from "./pages/job_description_page/jobDescriptionPage.js";
-import AddJobPage from "./pages/addJob_page/AddJob_page.js";
+import AddAndEditJobPage from "./pages/addAndEditJob_page/AddAndEditJob_page.js";
 import { getAllJobs } from "./apis/jobs.js";
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
     fetchData();
   }, []);
 
-  console.log(jobsData)
+  console.log(jobDetails);
 
   return (
     <>
@@ -92,9 +92,13 @@ function App() {
             }
           ></Route>
           <Route
-            path="/add-job"
+            path="/add-edit-job"
             element={
-              <AddJobPage userData={userData} setJobsData={setJobsData} />
+              <AddAndEditJobPage
+                userData={userData}
+                setJobsData={setJobsData}
+                setJobDetails={setJobDetails}
+              />
             }
           ></Route>
         </Routes>

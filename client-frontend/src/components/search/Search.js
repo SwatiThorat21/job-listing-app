@@ -9,6 +9,7 @@ import { getAllJobs } from "../../apis/jobs";
 export default function Search({ isLoggedIn, setJobsData }) {
   const navigate = useNavigate();
   const [selectedSkills, setSelectedSkills] = useState([]);
+  const [jobType, setJobType] = useState("");
 
   function handleChange(e) {
     const { value } = e.target;
@@ -31,6 +32,11 @@ export default function Search({ isLoggedIn, setJobsData }) {
     );
   }
 
+  function handleJobTypeChange(e) {
+    const { value } = e.target;
+    setJobType(value);
+  }
+
   useEffect(() => {
     const storedSkills = localStorage.getItem("selectedSkills");
     if (storedSkills) {
@@ -41,7 +47,7 @@ export default function Search({ isLoggedIn, setJobsData }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const jobs = await getAllJobs(selectedSkills);
+        const jobs = await getAllJobs(selectedSkills, jobType);
         setJobsData(jobs.jobs);
         console.log(jobs);
       } catch (error) {
@@ -49,9 +55,7 @@ export default function Search({ isLoggedIn, setJobsData }) {
       }
     };
     fetchData();
-  }, [selectedSkills, setJobsData]);
-
-  console.log(selectedSkills);
+  }, [selectedSkills, setJobsData, jobType]);
 
   function addJob(
     companyName,
@@ -80,7 +84,7 @@ export default function Search({ isLoggedIn, setJobsData }) {
         skillsRequired,
         information
       );
-      navigate("add-job");
+      navigate("add-edit-job");
     } catch (error) {}
   }
 
@@ -104,7 +108,13 @@ export default function Search({ isLoggedIn, setJobsData }) {
             alt="searchbar"
             className={styles.searchbar}
           ></img>
-          <input type="text" placeholder="Type any job title"></input>
+          <input
+            type="text"
+            placeholder="Type any job title"
+            name="jobType"
+            value={jobType}
+            onChange={handleJobTypeChange}
+          ></input>
         </div>
         <div className={styles.searchbySkills_clear_container}>
           <div

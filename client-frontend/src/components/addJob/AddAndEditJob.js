@@ -1,11 +1,32 @@
 import { useState } from "react";
 import job_bg from "../../images/job_bg.png";
-import styles from "./AddJob.module.css";
-import { createJob } from "../../apis/jobs";
+import styles from "./AddAndEditJob.module.css";
+import { createJob, editJobDataById } from "../../apis/jobs";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { getJobDataById } from "../../apis/jobs";
 
-export default function AddJob({ userData, setJobsData }) {
+export default function AddAndEditJob({
+  userData,
+  setJobsData,
+  setJobDetails,
+}) {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const fetchJobDetails = async () => {
+      const jobId = new URLSearchParams(location.search).get("jobId");
+      try {
+        const jobDetails = await getJobDataById(jobId);
+        setJobDetails(jobDetails);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchJobDetails();
+  }, [location.search, setJobDetails]);
 
   const [jobFormDetails, setJobFormDetails] = useState({
     companyName: "",
@@ -102,22 +123,42 @@ export default function AddJob({ userData, setJobsData }) {
 
     try {
       if (Object.keys(newErrors).length === 0) {
-        await createJob(
-          companyName,
-          logoUrl,
-          jobPosition,
-          monthlySalary,
-          jobType,
-          remote,
-          location,
-          jobDescription,
-          aboutCompany,
-          skillsRequired,
-          information,
-          userData,
-          setJobsData
-        );
-        navigate("/");
+        const jobId = new URLSearchParams(location.search).get("jobId");
+        const jwToken = localStorage.getItem("jwToken");
+        if (jobId) {
+          await editJobDataById(
+            companyName,
+            logoUrl,
+            jobPosition,
+            monthlySalary,
+            jobType,
+            remote,
+            location,
+            jobDescription,
+            aboutCompany,
+            skillsRequired,
+            information,
+            jobId,
+            jwToken
+          );
+        } else {
+          await createJob(
+            companyName,
+            logoUrl,
+            jobPosition,
+            monthlySalary,
+            jobType,
+            remote,
+            location,
+            jobDescription,
+            aboutCompany,
+            skillsRequired,
+            information,
+            userData,
+            setJobsData
+          );
+          navigate("/");
+        }
       }
     } catch (error) {
       console.log(error);
@@ -239,7 +280,9 @@ export default function AddJob({ userData, setJobsData }) {
                   <option value="Internship">Internship</option>
                 </select>
                 {errors.jobTypeErr && (
-                  <div style={{ color: "red", fontSize:"13px" }}>Please select job type</div>
+                  <div style={{ color: "red", fontSize: "13px" }}>
+                    Please select job type
+                  </div>
                 )}
               </div>
             </div>
@@ -256,7 +299,9 @@ export default function AddJob({ userData, setJobsData }) {
                   <option value="Office">Office</option>
                 </select>
                 {errors.remoteErr && (
-                  <div style={{ color: "red", fontSize:"13px" }}>Please select remote or office work</div>
+                  <div style={{ color: "red", fontSize: "13px" }}>
+                    Please select remote or office work
+                  </div>
                 )}
               </div>
             </div>

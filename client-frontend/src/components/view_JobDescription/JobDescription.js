@@ -3,7 +3,6 @@ import google from "../../images/Google.png";
 import stipend from "../../images/money-fill.png";
 import calender from "../../images/calender.png";
 import styles from "./JobDescription.module.css";
-import { editJobDataById } from "../../apis/jobs";
 
 export default function JobDescription({
   jobDetails,
@@ -13,9 +12,7 @@ export default function JobDescription({
   if (!jobDetails) return;
 
   function editJobDetails() {
-    const { _id: id } = jobDetails;
-    editJobDataById(id, userData.jwToken);
-    navigate("/add-job", { state: { jobDetails } });
+    navigate("/add-edit-job");
   }
   return (
     <>

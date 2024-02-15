@@ -17,7 +17,7 @@ export async function createJob(
   userData,
   setJobsData
 ) {
-  if (!userData || !setJobsData ) return;
+  if (!userData || !setJobsData) return;
   try {
     const reqUrl = `${backendBaseUrl}/job/create-job-post`;
     const reqPayload = {
@@ -44,7 +44,13 @@ export async function createJob(
         });
         return response.data;
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        if (error.response.status === 401) {
+          localStorage.removeItem("jwToken");
+          localStorage.removeItem("userData");
+          window.location.href = "/login";
+        }
+      });
   } catch (error) {
     console.log(error.message);
     throw error;
@@ -54,8 +60,8 @@ export async function createJob(
 export async function getAllJobs(skillsArray) {
   try {
     let reqUrl = `${backendBaseUrl}/job/job-posts`;
-    if(skillsArray && skillsArray.length > 0){
-      reqUrl += `?skillsRequired=${skillsArray.join(',')}`
+    if (skillsArray && skillsArray.length > 0) {
+      reqUrl += `?skillsRequired=${skillsArray.join(",")}`;
     }
     return await axios
       .get(reqUrl)
@@ -99,7 +105,13 @@ export async function editJobDataById(id, jwToken, setJobDetails) {
       .then((response) => {
         setJobDetails(response.data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        if (error.response.status === 401) {
+          localStorage.removeItem("jwToken");
+          localStorage.removeItem("userData");
+          window.location.href = "/login";
+        }
+      });
   } catch (error) {
     console.log(error.message);
     throw error;

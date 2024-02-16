@@ -102,6 +102,7 @@ function App() {
                 jobDetails={jobDetails}
                 setJobDetails={setJobDetails}
                 setUserData={setUserData}
+                setJobFormDetails={setJobFormDetails}
               />
             }
           ></Route>

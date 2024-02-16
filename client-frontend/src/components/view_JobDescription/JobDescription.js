@@ -4,16 +4,15 @@ import stipend from "../../images/money-fill.png";
 import calender from "../../images/calender.png";
 import styles from "./JobDescription.module.css";
 
-export default function JobDescription({
-  jobDetails,
-  userData,
-}) {
+export default function JobDescription({ jobDetails, setJobFormDetails }) {
   const navigate = useNavigate();
   if (!jobDetails) return;
 
   function editJobDetails() {
-    navigate("/add-edit-job");
+    navigate(`/add-edit-job?jobId=${jobDetails._id}`);
+    setJobFormDetails(jobDetails);
   }
+  console.log(jobDetails);
   return (
     <>
       <div className={styles.jd_containder}>

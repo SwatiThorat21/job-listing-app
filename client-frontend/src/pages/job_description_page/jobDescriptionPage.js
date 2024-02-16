@@ -12,7 +12,8 @@ export default function JobDescriptionPage({
   jobsData,
   jobDetails,
   setJobDetails,
-  setUserData
+  setUserData,
+  setJobFormDetails,
 }) {
   const { id } = useParams();
 
@@ -31,11 +32,15 @@ export default function JobDescriptionPage({
   return (
     <>
       <div className="jd_page_container">
-        <Navbar userData={userData} isLoggedIn={isLoggedIn} setUserData={setUserData} setIsLoggedIn={setIsLoggedIn} />
-        <JobDescription
-          jobsData={jobsData}
-          jobDetails={jobDetails}
+        <Navbar
           userData={userData}
+          isLoggedIn={isLoggedIn}
+          setUserData={setUserData}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+        <JobDescription
+          jobDetails={jobDetails}
+          setJobFormDetails={setJobFormDetails}
         />
       </div>
     </>

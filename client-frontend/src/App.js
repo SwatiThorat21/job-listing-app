@@ -13,6 +13,19 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [jobsData, setJobsData] = useState([]);
   const [jobDetails, setJobDetails] = useState({});
+  const [jobFormDetails, setJobFormDetails] = useState({
+    companyName: "",
+    logoUrl: "",
+    jobPosition: "",
+    monthlySalary: "",
+    jobType: "",
+    remote: "",
+    location: "",
+    jobDescription: "",
+    aboutCompany: "",
+    skillsRequired: "",
+    information: "",
+  });
 
   useEffect(() => {
     const token = localStorage.getItem("jwToken");
@@ -60,6 +73,7 @@ function App() {
                 setJobDetails={setJobDetails}
                 jobDetails={jobDetails}
                 setJobsData={setJobsData}
+                setJobFormDetails={setJobFormDetails}
               />
             }
           ></Route>
@@ -98,6 +112,8 @@ function App() {
                 userData={userData}
                 setJobsData={setJobsData}
                 setJobDetails={setJobDetails}
+                jobFormDetails={jobFormDetails}
+                setJobFormDetails={setJobFormDetails}
               />
             }
           ></Route>

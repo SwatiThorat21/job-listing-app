@@ -106,7 +106,7 @@ export async function editJobDataById(
   aboutCompany,
   skillsRequired,
   information,
-  id,
+  jobId,
   jwToken,
   setJobDetails
 ) {
@@ -125,7 +125,7 @@ export async function editJobDataById(
     information: information,
   };
   try {
-    const reqUrl = `${backendBaseUrl}/job/edit-job-post/${id}`;
+    const reqUrl = `${backendBaseUrl}/job/edit-job-post/${jobId}`;
 
     const headers = {
       jwtoken: `${jwToken}`,
@@ -136,7 +136,7 @@ export async function editJobDataById(
         setJobDetails(response.data);
       })
       .catch((error) => {
-        if (error.response.status === 401) {
+        if (error.response && error.response.status === 401) {
           localStorage.removeItem("jwToken");
           localStorage.removeItem("userData");
           window.location.href = "/login";

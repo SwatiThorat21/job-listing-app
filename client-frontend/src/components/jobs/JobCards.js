@@ -9,6 +9,7 @@ export default function Card({
   isLoggedIn,
   jobsData,
   setJobDetails,
+  setJobFormDetails,
 }) {
   const navigate = useNavigate();
   if (!jobsData) return;
@@ -18,9 +19,9 @@ export default function Card({
     getJobDataById(jobsData[index]._id, setJobDetails);
   }
 
-  function editJobData(index){
+  function editJobData(index) {
     navigate(`/add-edit-job?jobId=${jobsData[index]._id}`);
-  
+    setJobFormDetails(jobsData[index]);
   }
   return (
     <>
@@ -81,7 +82,12 @@ export default function Card({
                   </div>
                   <div className={styles.details_btn_wrapper}>
                     {isLoggedIn ? (
-                      <button className={styles.editJob_btn} onClick={()=>editJobData(index)}>Edit Job</button>
+                      <button
+                        className={styles.editJob_btn}
+                        onClick={() => editJobData(index)}
+                      >
+                        Edit Job
+                      </button>
                     ) : (
                       ""
                     )}

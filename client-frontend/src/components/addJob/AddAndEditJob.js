@@ -3,7 +3,6 @@ import job_bg from "../../images/job_bg.png";
 import styles from "./AddAndEditJob.module.css";
 import { createJob, editJobDataById } from "../../apis/jobs";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { getJobDataById } from "../../apis/jobs";
 
@@ -11,13 +10,15 @@ export default function AddAndEditJob({
   userData,
   setJobsData,
   setJobDetails,
+  setJobFormDetails,
+  jobFormDetails
 }) {
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     const fetchJobDetails = async () => {
-      const jobId = new URLSearchParams(location.search).get("jobId");
+      const urlParams = new URLSearchParams(window.location.search);
+      const jobId = urlParams.get("jobId");
       try {
         const jobDetails = await getJobDataById(jobId);
         setJobDetails(jobDetails);
@@ -26,21 +27,9 @@ export default function AddAndEditJob({
       }
     };
     fetchJobDetails();
-  }, [location.search, setJobDetails]);
+  }, [setJobDetails]);
 
-  const [jobFormDetails, setJobFormDetails] = useState({
-    companyName: "",
-    logoUrl: "",
-    jobPosition: "",
-    monthlySalary: "",
-    jobType: "",
-    remote: "",
-    location: "",
-    jobDescription: "",
-    aboutCompany: "",
-    skillsRequired: "",
-    information: "",
-  });
+
 
   const [errors, setErrors] = useState({
     companyNameErr: false,
@@ -123,7 +112,8 @@ export default function AddAndEditJob({
 
     try {
       if (Object.keys(newErrors).length === 0) {
-        const jobId = new URLSearchParams(location.search).get("jobId");
+        const urlParams = new URLSearchParams(window.location.search);
+        const jobId = urlParams.get("jobId");
         const jwToken = localStorage.getItem("jwToken");
         if (jobId) {
           await editJobDataById(
@@ -141,6 +131,7 @@ export default function AddAndEditJob({
             jobId,
             jwToken
           );
+          navigate("/");
         } else {
           await createJob(
             companyName,

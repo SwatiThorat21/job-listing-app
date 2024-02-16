@@ -145,7 +145,7 @@ export default function Register({ setUserData, setIsLoggedIn }) {
             )
           }
         >
-          Create Account
+           {isLoading ? "Loading..." : "Create Account"}
         </button>
         <p className={styles.signup_link_para}>
           Already have an account?
@@ -153,7 +153,7 @@ export default function Register({ setUserData, setIsLoggedIn }) {
             className={styles.signup_link}
             onClick={() => navigate("/login")}
           >
-            {isLoading ? "Loading..." : "Sign Up"}
+            Sign In
           </span>
         </p>
       </div>

@@ -10,6 +10,8 @@ export default function LoginForm({ setUserData, setIsLoggedIn }) {
     password: "",
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const [errors, setErrors] = useState({
     emailErr: false,
     passwordErr: false,
@@ -37,12 +39,15 @@ export default function LoginForm({ setUserData, setIsLoggedIn }) {
     setErrors(newErrors);
     try {
       if (Object.keys(newErrors).length === 0) {
+        setIsLoading(true);
         await login(email, password, setUserData);
-        setIsLoggedIn(true)
+        setIsLoggedIn(true);
         navigate("/");
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -70,7 +75,7 @@ export default function LoginForm({ setUserData, setIsLoggedIn }) {
             name="password"
             onChange={handleChange}
             value={loginData.password}
-            style={{marginTop:"0.7rem"}}
+            style={{ marginTop: "0.7rem" }}
           ></input>
           {errors.passwordErr && (
             <label className={styles.errorMsg}>Invalid password !</label>
@@ -88,7 +93,7 @@ export default function LoginForm({ setUserData, setIsLoggedIn }) {
             className={styles.signup_link}
             onClick={() => navigate("/register")}
           >
-            Sign Up
+             {isLoading ? "Loading..." : "Sign In"}
           </span>
         </p>
       </div>

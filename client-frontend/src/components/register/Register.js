@@ -13,6 +13,8 @@ export default function Register({ setUserData, setIsLoggedIn }) {
     agreeTerms: true,
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const [errors, setErrors] = useState({
     nameErr: false,
     emailErr: false,
@@ -52,12 +54,15 @@ export default function Register({ setUserData, setIsLoggedIn }) {
     setErrors(newErrors);
     try {
       if (Object.keys(newErrors).length === 0 && registerData.agreeTerms) {
+        setIsLoading(true);
         await register(name, email, mobile, password, setUserData);
         setIsLoggedIn(true);
         navigate("/");
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }
   return (
@@ -148,7 +153,7 @@ export default function Register({ setUserData, setIsLoggedIn }) {
             className={styles.signup_link}
             onClick={() => navigate("/login")}
           >
-            Sign In
+            {isLoading ? "Loading..." : "Sign Up"}
           </span>
         </p>
       </div>

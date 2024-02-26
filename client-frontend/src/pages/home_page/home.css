@@ -4,7 +4,12 @@
 .cards_container {
   margin-top: 3rem;
 }
-
+.home_container{
+  text-align: center;
+}
+.loader_wrapper{
+  margin: 5rem auto;
+}
 .noJobs_content {
   text-align: center;
   margin-top: 7rem;

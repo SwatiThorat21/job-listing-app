@@ -26,15 +26,17 @@ export default function Home({
         {jobsData.length === 0 && !isLoggedIn ? (
           <div className="noJobs_content">No Jobs are added.</div>
         ) : isLoading ? (
-          <ColorRing
-            visible={true}
-            height="80"
-            width="80"
-            ariaLabel="color-ring-loading"
-            wrapperStyle={{}}
-            wrapperClass="color-ring-wrapper"
-            colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
-          />
+          <div className="loader_wrapper">
+            <ColorRing
+              visible={true}
+              height="80"
+              width="80"
+              ariaLabel="color-ring-loading"
+              wrapperStyle={{}}
+              wrapperClass="color-ring-wrapper"
+              colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+            />
+          </div>
         ) : (
           <div className="mainPage_container">
             <Search isLoggedIn={isLoggedIn} setJobsData={setJobsData} />

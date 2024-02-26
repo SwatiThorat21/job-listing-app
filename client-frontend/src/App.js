@@ -8,6 +8,7 @@ import JobDescriptionPage from "./pages/job_description_page/jobDescriptionPage.
 import AddAndEditJobPage from "./pages/addAndEditJob_page/AddAndEditJob_page.js";
 import { getAllJobs } from "./apis/jobs.js";
 
+
 function App() {
   const [userData, setUserData] = useState(undefined);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -26,6 +27,7 @@ function App() {
     skillsRequired: "",
     information: "",
   });
+  const [isLoading, setIsloading] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("jwToken");
@@ -46,9 +48,11 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsloading(true)
       try {
         const jobs = await getAllJobs();
         setJobsData(jobs.jobs);
+        setIsloading(false)
       } catch (error) {
         console.error(error.message);
       }
@@ -74,6 +78,7 @@ function App() {
                 jobDetails={jobDetails}
                 setJobsData={setJobsData}
                 setJobFormDetails={setJobFormDetails}
+                isLoading={isLoading}
               />
             }
           ></Route>

@@ -2,6 +2,7 @@ import "./home.css";
 import Navbar from "../../components/navbar/Navbar";
 import Search from "../../components/search/Search";
 import Card from "../../components/jobs/JobCards";
+import { Audio } from "react-loader-spinner";
 
 export default function Home({
   userData,
@@ -10,7 +11,8 @@ export default function Home({
   jobsData,
   setJobDetails,
   setJobsData,
-  setJobFormDetails
+  setJobFormDetails,
+  isLoading,
 }) {
   return (
     <>
@@ -21,11 +23,21 @@ export default function Home({
           setIsLoggedIn={setIsLoggedIn}
         />
 
-        {jobsData.length === 0  && !isLoggedIn ? (
+        {jobsData.length === 0 && !isLoggedIn ? (
           <div className="noJobs_content">No Jobs are added.</div>
+        ) : isLoading ? (
+          <Audio
+            height="80"
+            width="80"
+            radius="9"
+            color="green"
+            ariaLabel="loading"
+            wrapperStyle
+            wrapperClass
+          />
         ) : (
           <div className="mainPage_container">
-            <Search isLoggedIn={isLoggedIn} setJobsData={setJobsData}/>
+            <Search isLoggedIn={isLoggedIn} setJobsData={setJobsData} />
             <div className="cards_container">
               <Card
                 isLoggedIn={isLoggedIn}

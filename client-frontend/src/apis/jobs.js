@@ -72,7 +72,12 @@ export async function getAllJobs(skillsArray, jobType) {
         console.log(response.data);
         return response.data;
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        if (error.response && error.response.status === 401) {
+          localStorage.removeItem("jwToken");
+          localStorage.removeItem("userData");
+        }
+      });
   } catch (error) {
     console.log(error);
     throw error;

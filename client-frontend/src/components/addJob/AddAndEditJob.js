@@ -11,7 +11,7 @@ export default function AddAndEditJob({
   setJobsData,
   setJobDetails,
   setJobFormDetails,
-  jobFormDetails
+  jobFormDetails,
 }) {
   const navigate = useNavigate();
 
@@ -19,17 +19,17 @@ export default function AddAndEditJob({
     const fetchJobDetails = async () => {
       const urlParams = new URLSearchParams(window.location.search);
       const jobId = urlParams.get("jobId");
-      try {
-        const jobDetails = await getJobDataById(jobId);
-        setJobDetails(jobDetails);
-      } catch (error) {
-        console.error(error);
+      if (jobId) {
+        try {
+          const jobDetails = await getJobDataById(jobId);
+          setJobDetails(jobDetails);
+        } catch (error) {
+          console.error(error);
+        }
       }
     };
     fetchJobDetails();
   }, [setJobDetails]);
-
-
 
   const [errors, setErrors] = useState({
     companyNameErr: false,
@@ -131,6 +131,19 @@ export default function AddAndEditJob({
             jobId,
             jwToken
           );
+          setJobFormDetails({
+            companyName: "",
+            logoUrl: "",
+            jobPosition: "",
+            monthlySalary: "",
+            jobType: "",
+            remote: "",
+            location: "",
+            jobDescription: "",
+            aboutCompany: "",
+            skillsRequired: "",
+            information: "",
+          });
           navigate("/");
         } else {
           await createJob(
@@ -156,6 +169,22 @@ export default function AddAndEditJob({
     }
   }
 
+  function handleClose() {
+    navigate("/");
+    setJobFormDetails({
+      companyName: "",
+      logoUrl: "",
+      jobPosition: "",
+      monthlySalary: "",
+      jobType: "",
+      remote: "",
+      location: "",
+      jobDescription: "",
+      aboutCompany: "",
+      skillsRequired: "",
+      information: "",
+    });
+  }
   return (
     <>
       <div className={styles.addJob_container}>
@@ -412,7 +441,9 @@ export default function AddAndEditJob({
             </div>
           </div>
           <div className={styles.btn_wrapper}>
-            <button className={styles.cancel_btn}>Cancel</button>
+            <button className={styles.cancel_btn} onClick={handleClose}>
+              Cancel
+            </button>
             <button
               className={styles.addJob_btn}
               onClick={() =>
